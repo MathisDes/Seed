@@ -1,6 +1,4 @@
-package reg;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class INS extends JFrame {
+public class inscription extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField email;
@@ -27,13 +25,13 @@ public class INS extends JFrame {
 
 	public static void main(String[] args) {
 
-		INS frame = new INS();
+		inscription frame = new inscription();
 		frame.setVisible(true);
 
 	}
 
 
-	public INS() {
+	public inscription() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
@@ -97,8 +95,8 @@ public class INS extends JFrame {
 				try {
 					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
 
-					String query = "INSERT INTO account values('" + userName + "','" +
-							password + "','" + emailId + "','" + /*???role???*/  "')";
+					String query = "INSERT INTO adherent values('" + userName + "','" +
+							password + "','" + email + "','" + /*???role???*/  "')";
 
 					Statement sta = connection.createStatement();
 					int x = sta.executeUpdate(query);
