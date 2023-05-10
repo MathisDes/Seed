@@ -59,7 +59,7 @@ public class panier {
 		barreRecherche = new JTextField();
 		barreRecherche.setForeground(new Color(128, 128, 128));
 		barreRecherche.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		barreRecherche.setText("Rechercher...\r\n");
+		barreRecherche.setText("Rechercher...");
 		barreRecherche.setBounds(193, 27, 719, 49);
 		panel.add(barreRecherche);
 		barreRecherche.setColumns(10);

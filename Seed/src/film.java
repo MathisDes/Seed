@@ -47,7 +47,7 @@ public class film {
 		btnPanier.setBounds(1193, 10, 180, 80);
 		panel.add(btnPanier);
 		
-		JButton btnCompte = new JButton("Mon compte\r\n");
+		JButton btnCompte = new JButton("Mon compte");
 		btnCompte.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCompte.setBounds(967, 10, 180, 80);
 		panel.add(btnCompte);
@@ -55,7 +55,7 @@ public class film {
 		barreRecherche = new JTextField();
 		barreRecherche.setForeground(new Color(128, 128, 128));
 		barreRecherche.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		barreRecherche.setText("Rechercher...\r\n");
+		barreRecherche.setText("Rechercher...");
 		barreRecherche.setBounds(193, 27, 719, 49);
 		panel.add(barreRecherche);
 		barreRecherche.setColumns(10);
