@@ -1,84 +1,66 @@
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
 
-public class admin {
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-	private JFrame frame;
-	private JTextField barreRecherche;
+import javax.swing.JPanel;
+
+import javax.swing.border.EmptyBorder;
+
+public class admin extends JFrame {
+	private JPanel contentPane;
 
 	public static void main(String[] args) {
 
-		admin window = new admin();
-		window.frame.setVisible(true);
+		admin frame = new admin();
+		frame.setVisible(true);
 
 	}
 
 
 	public admin() {
-        frame = new JFrame();
-        frame.setSize(1400,700);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(941,530);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(Color.GRAY);
-		panel.setBounds(0, 0, 1400, 100);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JButton btnDeco = new JButton("Se deconnecter");
-		btnDeco.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnDeco.setBounds(967, 10, 180, 80);
-		panel.add(btnDeco);
-		
-		barreRecherche = new JTextField();
-		barreRecherche.setForeground(new Color(128, 128, 128));
-		barreRecherche.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		barreRecherche.setText("Rechercher...\r\n");
-		barreRecherche.setBounds(193, 27, 719, 49);
-		panel.add(barreRecherche);
-		barreRecherche.setColumns(10);
-		
-		JLabel title = new JLabel("Page ADMIN");
-		title.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		title.setBounds(587, 110, 125, 44);
-		frame.getContentPane().add(title);
-		
-		JButton btnAjt = new JButton("Ajouter");
-		btnAjt.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnAjt.addActionListener(new ActionListener() {
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        supprimer supp = new supprimer();
+		        supp.setVisible(true);
 			}
 		});
-		btnAjt.setBounds(197, 231, 173, 89);
-		frame.getContentPane().add(btnAjt);
+		btnSupprimer.setBounds(96, 182, 117, 65);
+		contentPane.add(btnSupprimer);
+		
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        ajout aj = new ajout();
+		        aj.setVisible(true);
+			}
+		});
+		btnAjouter.setBounds(419, 182, 117, 65);
+		contentPane.add(btnAjouter);
 		
 		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnModifier.setBounds(559, 231, 173, 89);
-		frame.getContentPane().add(btnModifier);
-		
-		JButton btnSupp = new JButton("Supprimer");
-		btnSupp.addActionListener(new ActionListener() {
+		btnModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		        modifier modif = new modifier();
+		        modif.setVisible(true);
 			}
 		});
-		btnSupp.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnSupp.setBounds(1020, 231, 173, 89);
-		frame.getContentPane().add(btnSupp);
+		btnModifier.setBounds(763, 182, 117, 65);
+		contentPane.add(btnModifier);
+
 	}
 }

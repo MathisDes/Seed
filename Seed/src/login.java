@@ -33,6 +33,7 @@ public class login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700,400);
 		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -92,11 +93,16 @@ public class login extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(btnConnecter, "Mauvais identifiants");
 					}
+				
+
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}
 			}
+			
 		});
+		
+		
 
 		contentPane.add(btnConnecter);
 

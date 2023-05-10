@@ -1,4 +1,5 @@
 import java.awt.Color;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,7 +27,6 @@ public class changerpwd extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,4 +1,3 @@
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +22,7 @@ public class inscription extends JFrame {
 	private JPasswordField passwordField;
 	private JButton btnNewButton;
 
+
 	public static void main(String[] args) {
 
 		inscription frame = new inscription();
@@ -34,9 +34,10 @@ public class inscription extends JFrame {
 	public inscription() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
+		setSize(670, 600);
 		setResizable(false);
 		contentPane = new JPanel();
+        setLocationRelativeTo(null);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -91,20 +92,24 @@ public class inscription extends JFrame {
 				String emailId = email.getText();
 				String userName = username.getText();
 				String password = passwordField.getText();
+				String role = "client";
+
 
 				try {
 					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
 
 					String query = "INSERT INTO adherent values('" + userName + "','" +
-							password + "','" + email + "','" + /*???role???*/  "')";
+							password + "','" + emailId + "','" + role +"')";
 
 					Statement sta = connection.createStatement();
 					int x = sta.executeUpdate(query);
 					if (x == 0) {
 						JOptionPane.showMessageDialog(btnNewButton, "Compte deja existant");
 					} else {
-						JOptionPane.showMessageDialog(btnNewButton,
-								"Bienvenur sur le seed, " + "Votre compte a été crée ");
+						JOptionPane.showMessageDialog(btnNewButton," Votre compte a été crée ");
+						dispose();
+						accueil ac = new accueil();
+						
 					}
 					connection.close();
 				} catch (Exception exception) {
