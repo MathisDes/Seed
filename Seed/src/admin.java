@@ -45,7 +45,7 @@ public class admin extends JFrame {
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        dispose();
-		        ajout aj = new ajout();
+		        ajout_film aj = new ajout_film();
 		        aj.setVisible(true);
 			}
 		});

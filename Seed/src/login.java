@@ -88,12 +88,13 @@ public class login extends JFrame {
 					ResultSet rs = st.executeQuery();
 					if (rs.next()) {
 						dispose();
-						accueil accueil = new accueil(userName);
-						accueil.setVisible(true);
+						accueil acc = new accueil(userName);
+						acc.setVisible(true);
 					} else {
+							
 						JOptionPane.showMessageDialog(btnConnecter, "Mauvais identifiants");
 					}
-				
+					
 
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();

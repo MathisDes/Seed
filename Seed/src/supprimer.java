@@ -1,4 +1,5 @@
 import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -26,6 +27,23 @@ public class supprimer extends JFrame {
 		frame.setVisible(true);
 
 	}
+	
+	
+    public static Connection  connecterDB(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver oki");
+            String url="jdbc:mysql://localhost:3306/seed";
+            String user="root";
+            String password="";
+           Connection cnx=DriverManager.getConnection(url,user,password);
+            System.out.println("Connexion bien établié");
+            return cnx;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 	public supprimer() {
@@ -38,10 +56,7 @@ public class supprimer extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Livre ", "Film", "Jeu"}));
-		comboBox.setBounds(465, 97, 134, 37);
-		contentPane.add(comboBox);
+
 		
 		JLabel lblNewLabel = new JLabel("Supprimer");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

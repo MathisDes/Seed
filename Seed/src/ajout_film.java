@@ -18,8 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
 
-public class modifier extends JFrame {
+public class ajout_film extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_Titre;
 	private JTextField textField_Annee;
@@ -31,19 +32,18 @@ public class modifier extends JFrame {
 
 	public static void main(String[] args) {
 
-		modifier frame = new modifier();
+		ajout_film frame = new ajout_film();
 		frame.setVisible(true);
 
 	}
 	
 
-	public modifier() {
+	public ajout_film() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700,400);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -51,18 +51,18 @@ public class modifier extends JFrame {
 		Statement st;
 		ResultSet rs;
 		
-		JLabel lblNewLabel = new JLabel("Ajouter");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(49, 31, 124, 47);
-		contentPane.add(lblNewLabel);
+		JLabel lblPrincipal = new JLabel("Ajouter un film");
+		lblPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPrincipal.setBounds(49, 31, 175, 47);
+		contentPane.add(lblPrincipal);
 		
-		JButton btnNewButton = new JButton("Confirmer");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnConfirmer = new JButton("Confirmer");
+		btnConfirmer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
 					Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/seed","root", "");
-					PreparedStatement st = (PreparedStatement) connection.prepareStatement("update INTO films (titre, annee, genre, realisateur, acteurs, synopsis, img_url) VALUES (?, ?, ?, ?, ?, ?, ?) ");
+					PreparedStatement st = (PreparedStatement) connection.prepareStatement("INSERT INTO films (titre, annee, genre, realisateur, acteurs, synopsis, img_url) VALUES (?, ?, ?, ?, ?, ?, ?) ");
 					st.setString(1,textField_Titre.getText());
 					st.setString(2,textField_Annee.getText());
 					st.setString(3,textField_Genre.getText());
@@ -81,9 +81,9 @@ public class modifier extends JFrame {
 			}
 			
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(33, 275, 191, 54);
-		contentPane.add(btnNewButton);
+		btnConfirmer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnConfirmer.setBounds(33, 275, 191, 54);
+		contentPane.add(btnConfirmer);
 		
 		textField_Titre = new JTextField();
 		textField_Titre.setBounds(106, 106, 96, 19);
@@ -147,6 +147,44 @@ public class modifier extends JFrame {
 		JLabel lblNewLabel_image = new JLabel("image\r\n");
 		lblNewLabel_image.setBounds(399, 109, 45, 13);
 		contentPane.add(lblNewLabel_image);
+		
+		JRadioButton btnRadioJeu = new JRadioButton("JEU");
+		btnRadioJeu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ajout_jeu ajout_jeu = new ajout_jeu();
+				ajout_jeu.setVisible(true);
+			}
+		});
+		btnRadioJeu.setBounds(454, 199, 103, 21);
+		contentPane.add(btnRadioJeu);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("LIVRE");
+		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ajout_livre ajout_liv = new ajout_livre();
+				ajout_liv.setVisible(true);
+				
+			}
+		});
+		rdbtnNewRadioButton_1.setBounds(454, 248, 103, 21);
+		contentPane.add(rdbtnNewRadioButton_1);
+		
+		JButton btnRetour = new JButton("<- Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				admin adm = new admin();
+				adm.setVisible(true);
+			}
+		});
+		
+		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnRetour.setBounds(535, 10, 141, 47);
+		contentPane.add(btnRetour);
+		
+
 
 	}
 }
