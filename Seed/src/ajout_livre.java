@@ -40,7 +40,7 @@ public class ajout_livre extends JFrame {
 
 	public ajout_livre() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(700,400);
+		setSize(859,496);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -51,13 +51,13 @@ public class ajout_livre extends JFrame {
 		Statement st;
 		ResultSet rs;
 		
-		JLabel lblNewLabel = new JLabel("Ajouter un livre");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(49, 31, 175, 47);
-		contentPane.add(lblNewLabel);
+		JLabel lblPrincipal = new JLabel("Ajouter un livre");
+		lblPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPrincipal.setBounds(49, 31, 175, 47);
+		contentPane.add(lblPrincipal);
 		
-		JButton btnNewButton = new JButton("Confirmer");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnConfirmer = new JButton("Confirmer");
+		btnConfirmer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
@@ -81,9 +81,9 @@ public class ajout_livre extends JFrame {
 			}
 			
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(33, 275, 191, 54);
-		contentPane.add(btnNewButton);
+		btnConfirmer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnConfirmer.setBounds(33, 275, 191, 54);
+		contentPane.add(btnConfirmer);
 		
 		textField_Nom = new JTextField();
 		textField_Nom.setBounds(106, 106, 96, 19);
@@ -116,27 +116,33 @@ public class ajout_livre extends JFrame {
 		contentPane.add(textField_Resume);
 		
 		JLabel lblTitre = new JLabel("nom");
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTitre.setBounds(37, 109, 45, 13);
 		contentPane.add(lblTitre);
 		
 		JLabel lblAnnee = new JLabel("prix");
+		lblAnnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAnnee.setBounds(33, 155, 45, 13);
 		contentPane.add(lblAnnee);
 		
 		JLabel lblGenre = new JLabel("auteur");
+		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblGenre.setBounds(37, 204, 45, 13);
 		contentPane.add(lblGenre);
 		
 		JLabel lblRealisateur = new JLabel("annee");
+		lblRealisateur.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRealisateur.setBounds(230, 109, 56, 13);
 		contentPane.add(lblRealisateur);
 		
 		JLabel lblActeur = new JLabel("type");
+		lblActeur.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblActeur.setBounds(230, 155, 45, 13);
 		contentPane.add(lblActeur);
 		
 		JLabel lblSyno = new JLabel("resume");
-		lblSyno.setBounds(230, 204, 45, 13);
+		lblSyno.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSyno.setBounds(230, 204, 56, 13);
 		contentPane.add(lblSyno);
 		
 		textField_url = new JTextField();
@@ -145,22 +151,25 @@ public class ajout_livre extends JFrame {
 		textField_url.setColumns(10);
 		
 		JLabel lblNewLabel_image = new JLabel("image\r\n");
+		lblNewLabel_image.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_image.setBounds(399, 109, 45, 13);
 		contentPane.add(lblNewLabel_image);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("FILM");
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+		JRadioButton btnRadioFilm = new JRadioButton("FILM");
+		btnRadioFilm.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRadioFilm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ajout_film ajout_fil = new ajout_film();
 				ajout_fil.setVisible(true);
 			}
 		});
-		rdbtnNewRadioButton.setBounds(454, 199, 103, 21);
-		contentPane.add(rdbtnNewRadioButton);
+		btnRadioFilm.setBounds(572, 271, 136, 47);
+		contentPane.add(btnRadioFilm);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("JEU");
-		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+		JRadioButton btnRadioJeu = new JRadioButton("JEU");
+		btnRadioJeu.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRadioJeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ajout_jeu ajout_jeu = new ajout_jeu();
@@ -168,11 +177,11 @@ public class ajout_livre extends JFrame {
 				
 			}
 		});
-		rdbtnNewRadioButton_1.setBounds(454, 248, 103, 21);
-		contentPane.add(rdbtnNewRadioButton_1);
+		btnRadioJeu.setBounds(572, 320, 153, 47);
+		contentPane.add(btnRadioJeu);
 		
-		JButton btnNewButton_1 = new JButton("<- Retour");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnRetour = new JButton("<- Retour");
+		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				admin adm = new admin();
@@ -180,9 +189,14 @@ public class ajout_livre extends JFrame {
 			}
 		});
 		
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		btnNewButton_1.setBounds(535, 10, 141, 47);
-		contentPane.add(btnNewButton_1);
+		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnRetour.setBounds(619, 33, 191, 68);
+		contentPane.add(btnRetour);
+		
+		JLabel lblNewLabel = new JLabel("Changer oeuvre :");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(526, 228, 220, 47);
+		contentPane.add(lblNewLabel);
 
 
 	}

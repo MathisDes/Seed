@@ -102,12 +102,16 @@ public class login extends JFrame {
 			}
 			
 		});
-		
-		
-
 		contentPane.add(btnConnecter);
 
 		JButton btnInscrire = new JButton("S'inscrire");
+		btnInscrire.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				inscription ins= new inscription();
+				ins.setVisible(true);
+			}
+		});
 		btnInscrire.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnInscrire.setBounds(258, 323, 155, 30);
 		contentPane.add(btnInscrire);

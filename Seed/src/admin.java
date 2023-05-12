@@ -22,7 +22,7 @@ public class admin extends JFrame {
 
 	public admin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(941,530);
+		setSize(700,400);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -34,11 +34,11 @@ public class admin extends JFrame {
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        dispose();
-		        supprimer supp = new supprimer();
+		        suppr_film supp = new suppr_film();
 		        supp.setVisible(true);
 			}
 		});
-		btnSupprimer.setBounds(96, 182, 117, 65);
+		btnSupprimer.setBounds(270, 169, 117, 65);
 		contentPane.add(btnSupprimer);
 		
 		JButton btnAjouter = new JButton("Ajouter");
@@ -49,7 +49,7 @@ public class admin extends JFrame {
 		        aj.setVisible(true);
 			}
 		});
-		btnAjouter.setBounds(419, 182, 117, 65);
+		btnAjouter.setBounds(57, 169, 117, 65);
 		contentPane.add(btnAjouter);
 		
 		JButton btnModifier = new JButton("Modifier");
@@ -59,7 +59,7 @@ public class admin extends JFrame {
 		        modif.setVisible(true);
 			}
 		});
-		btnModifier.setBounds(763, 182, 117, 65);
+		btnModifier.setBounds(476, 169, 117, 65);
 		contentPane.add(btnModifier);
 
 	}

@@ -19,6 +19,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ajout_film extends JFrame {
 	private JPanel contentPane;
@@ -40,16 +44,14 @@ public class ajout_film extends JFrame {
 
 	public ajout_film() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(700,400);
+		setSize(859,496);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Connection con;
-		Statement st;
-		ResultSet rs;
+
 		
 		JLabel lblPrincipal = new JLabel("Ajouter un film");
 		lblPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -74,6 +76,11 @@ public class ajout_film extends JFrame {
 					connection.close();
 					JOptionPane.showMessageDialog(null, "Insertion réussie");
 					
+					dispose();
+					ajout_film ajout_film = new ajout_film();
+					ajout_film.setVisible(true);
+					
+					
 					
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
@@ -82,7 +89,7 @@ public class ajout_film extends JFrame {
 			
 		});
 		btnConfirmer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnConfirmer.setBounds(33, 275, 191, 54);
+		btnConfirmer.setBounds(37, 351, 191, 54);
 		contentPane.add(btnConfirmer);
 		
 		textField_Titre = new JTextField();
@@ -102,53 +109,61 @@ public class ajout_film extends JFrame {
 		
 		textField_Realisateur = new JTextField();
 		textField_Realisateur.setColumns(10);
-		textField_Realisateur.setBounds(285, 106, 96, 19);
+		textField_Realisateur.setBounds(312, 106, 96, 19);
 		contentPane.add(textField_Realisateur);
 		
 		textField_Acteur = new JTextField();
 		textField_Acteur.setColumns(10);
-		textField_Acteur.setBounds(285, 152, 96, 19);
+		textField_Acteur.setBounds(312, 152, 96, 19);
 		contentPane.add(textField_Acteur);
 		
 		textField_Syno = new JTextField();
 		textField_Syno.setColumns(10);
-		textField_Syno.setBounds(285, 201, 116, 68);
+		textField_Syno.setBounds(292, 201, 153, 68);
 		contentPane.add(textField_Syno);
 		
 		JLabel lblTitre = new JLabel("titre\r\n");
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTitre.setBounds(37, 109, 45, 13);
 		contentPane.add(lblTitre);
 		
 		JLabel lblAnnee = new JLabel("annee\r\n");
+		lblAnnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAnnee.setBounds(33, 155, 45, 13);
 		contentPane.add(lblAnnee);
 		
 		JLabel lblGenre = new JLabel("genre");
-		lblGenre.setBounds(37, 204, 45, 13);
+		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGenre.setBounds(37, 204, 45, 16);
 		contentPane.add(lblGenre);
 		
 		JLabel lblRealisateur = new JLabel("realisateur");
-		lblRealisateur.setBounds(230, 109, 56, 13);
+		lblRealisateur.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRealisateur.setBounds(230, 109, 70, 13);
 		contentPane.add(lblRealisateur);
 		
 		JLabel lblActeur = new JLabel("acteur");
+		lblActeur.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblActeur.setBounds(230, 155, 45, 13);
 		contentPane.add(lblActeur);
 		
-		JLabel lblSyno = new JLabel("syno");
-		lblSyno.setBounds(230, 204, 45, 13);
+		JLabel lblSyno = new JLabel("synopsis");
+		lblSyno.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSyno.setBounds(230, 204, 56, 13);
 		contentPane.add(lblSyno);
 		
 		textField_url = new JTextField();
-		textField_url.setBounds(454, 106, 96, 19);
+		textField_url.setBounds(509, 106, 96, 19);
 		contentPane.add(textField_url);
 		textField_url.setColumns(10);
 		
 		JLabel lblNewLabel_image = new JLabel("image\r\n");
-		lblNewLabel_image.setBounds(399, 109, 45, 13);
+		lblNewLabel_image.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_image.setBounds(454, 105, 45, 13);
 		contentPane.add(lblNewLabel_image);
 		
 		JRadioButton btnRadioJeu = new JRadioButton("JEU");
+		btnRadioJeu.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRadioJeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -156,10 +171,11 @@ public class ajout_film extends JFrame {
 				ajout_jeu.setVisible(true);
 			}
 		});
-		btnRadioJeu.setBounds(454, 199, 103, 21);
+		btnRadioJeu.setBounds(572, 271, 136, 47);
 		contentPane.add(btnRadioJeu);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("LIVRE");
+		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -168,7 +184,7 @@ public class ajout_film extends JFrame {
 				
 			}
 		});
-		rdbtnNewRadioButton_1.setBounds(454, 248, 103, 21);
+		rdbtnNewRadioButton_1.setBounds(572, 320, 153, 47);
 		contentPane.add(rdbtnNewRadioButton_1);
 		
 		JButton btnRetour = new JButton("<- Retour");
@@ -181,8 +197,13 @@ public class ajout_film extends JFrame {
 		});
 		
 		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		btnRetour.setBounds(535, 10, 141, 47);
+		btnRetour.setBounds(619, 33, 191, 68);
 		contentPane.add(btnRetour);
+		
+		JLabel lblNewLabel = new JLabel("Changer oeuvre :");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel.setBounds(516, 222, 220, 47);
+		contentPane.add(lblNewLabel);
 		
 
 
