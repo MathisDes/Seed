@@ -1,15 +1,9 @@
-
 import java.awt.Font;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLIntegrityConstraintViolationException;
-
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +14,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
 public class inscription extends JFrame {
 
 	private JPanel contentPane;
@@ -28,6 +21,7 @@ public class inscription extends JFrame {
 	private JTextField username;
 	private JPasswordField passwordField;
 	private JButton btnNewButton;
+
 
 	public static void main(String[] args) {
 
@@ -40,9 +34,10 @@ public class inscription extends JFrame {
 	public inscription() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
+		setSize(670, 600);
 		setResizable(false);
 		contentPane = new JPanel();
+        setLocationRelativeTo(null);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -97,57 +92,30 @@ public class inscription extends JFrame {
 				String emailId = email.getText();
 				String userName = username.getText();
 				String password = passwordField.getText();
-
-				String query = "INSERT INTO adherent (username, password, email) VALUES (?, ?, ?)";
-				if (email.getText().isEmpty() || passwordField.getText().isEmpty())
-				{
-					JOptionPane.showMessageDialog(contentPane,"Merci de remplir les champs");
-				}
-				else {
-				try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
-		             PreparedStatement statement = conn.prepareStatement(query)) {
-		        	
-		        	  MessageDigest digest = MessageDigest.getInstance("SHA-256");
-
-		              // Conversion du mot de passe en tableau de bytes
-		              byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-
-		              // Calcul du haché du mot de passe
-		              byte[] hashedBytes = digest.digest(passwordBytes);
-
-		              // Conversion du haché en une représentation hexadécimale
-		              StringBuilder hexString = new StringBuilder();
-		              for (byte b : hashedBytes) {
-		                  String hex = Integer.toHexString(0xff & b);
-		                  if (hex.length() == 1) {
-		                      hexString.append('0');
-		                  }
-		                  hexString.append(hex);
-		              }
-
-		              String hashedPassword = hexString.toString();
-		            
-		        	
-		            statement.setString(1, userName);
-		            statement.setString(2, hashedPassword);
-		            statement.setString(3, emailId);
+				String role = "client";
 
 
-		            int res= statement.executeUpdate();
-		            if (res > 0) {
-		                System.out.println("L'inscription a été effectuée avec succès !");
-		            }
-		           
-				}
-		        catch (SQLIntegrityConstraintViolationException duplicate) {
-					
-					JOptionPane.showMessageDialog(contentPane, "Compte deja existant");
-					
-				}
-		        catch (Exception exception) {
+				try {
+					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
+
+					String query = "INSERT INTO adherent values('" + userName + "','" +
+							password + "','" + emailId + "','" + role +"')";
+
+					Statement sta = connection.createStatement();
+					int x = sta.executeUpdate(query);
+					if (x == 0) {
+						JOptionPane.showMessageDialog(btnNewButton, "Compte deja existant");
+					} else {
+						JOptionPane.showMessageDialog(btnNewButton," Votre compte a été crée ");
+						dispose();
+						accueil ac = new accueil();
+						
+					}
+					connection.close();
+				} catch (Exception exception) {
 					exception.printStackTrace();
 				}
-				}}
+			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		contentPane.add(btnNewButton);

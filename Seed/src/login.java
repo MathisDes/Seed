@@ -33,6 +33,7 @@ public class login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700,400);
 		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -87,20 +88,30 @@ public class login extends JFrame {
 					ResultSet rs = st.executeQuery();
 					if (rs.next()) {
 						dispose();
-						accueil accueil = new accueil(userName);
-						accueil.setVisible(true);
+						accueil acc = new accueil(userName);
+						acc.setVisible(true);
 					} else {
+							
 						JOptionPane.showMessageDialog(btnConnecter, "Mauvais identifiants");
 					}
+					
+
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}
 			}
+			
 		});
-
 		contentPane.add(btnConnecter);
 
 		JButton btnInscrire = new JButton("S'inscrire");
+		btnInscrire.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				inscription ins= new inscription();
+				ins.setVisible(true);
+			}
+		});
 		btnInscrire.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnInscrire.setBounds(258, 323, 155, 30);
 		contentPane.add(btnInscrire);
