@@ -1,13 +1,8 @@
-
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.*;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import javax.swing.JPanel;
-
-import javax.swing.border.EmptyBorder;
 
 public class admin extends JFrame {
 	private JPanel contentPane;
@@ -26,7 +21,6 @@ public class admin extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -55,8 +49,8 @@ public class admin extends JFrame {
 		JButton btnModifier = new JButton("Modifier");
 		btnModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        modifier modif = new modifier();
-		        modif.setVisible(true);
+				modifier_film modif_fil = new modifier_film();
+		        modif_fil.setVisible(true);
 			}
 		});
 		btnModifier.setBounds(476, 169, 117, 65);

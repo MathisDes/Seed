@@ -1,29 +1,8 @@
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class suppr_livre extends JFrame {
 	private JPanel contentPane;
@@ -123,7 +102,7 @@ public class suppr_livre extends JFrame {
 
 
 	      JScrollPane tableau = new JScrollPane(table);
-	      tableau.setBounds(28, 100, 365, 218);
+	      tableau.setBounds(28, 100, 452, 218);
 	      getContentPane().add(tableau);
 	      setVisible(true);
 

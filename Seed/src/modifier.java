@@ -47,9 +47,7 @@ public class modifier extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Connection con;
-		Statement st;
-		ResultSet rs;
+
 		
 		JLabel lblNewLabel = new JLabel("Ajouter");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

@@ -1,28 +1,7 @@
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.*;
 
 public class ajout_film extends JFrame {
 	private JPanel contentPane;
@@ -157,7 +136,7 @@ public class ajout_film extends JFrame {
 		contentPane.add(textField_url);
 		textField_url.setColumns(10);
 		
-		JLabel lblNewLabel_image = new JLabel("image\r\n");
+		JLabel lblNewLabel_image = new JLabel("image");
 		lblNewLabel_image.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_image.setBounds(454, 105, 45, 13);
 		contentPane.add(lblNewLabel_image);
