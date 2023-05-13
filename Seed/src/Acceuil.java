@@ -12,20 +12,21 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 
-public class page1 {
+public class Acceuil {
 
 	private JFrame frame;
 	private JTextField barreRecherche;
+	private Session maSession;
+	/*public static void main(String[] args) {
 
-	public static void main(String[] args) {
-
-		page1 window = new page1();
+		Acceuil window = new Acceuil();
 		window.frame.setVisible(true);
 
-	}
+	}*/
 
 
-	public page1() {
+	public Acceuil(String id) {
+		maSession = new Session(id);
         frame = new JFrame();
         frame.setSize(1400,700);
         frame.setResizable(false);
@@ -58,7 +59,7 @@ public class page1 {
 		panel.add(barreRecherche);
 		barreRecherche.setColumns(10);
 		
-		JLabel title = new JLabel("Bienvenue sur le SEED");
+		JLabel title = new JLabel("Bienvenue sur le SEED votre adresse mail est " + maSession.getEmail());
 		title.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		title.setBounds(10, 110, 255, 44);
 		frame.getContentPane().add(title);
@@ -84,5 +85,6 @@ public class page1 {
 		panel_1.setBackground(new Color(255, 128, 0));
 		panel_1.setBounds(69, 320, 1290, 294);
 		frame.getContentPane().add(panel_1);
+		frame.setVisible(true);
 	}
 }

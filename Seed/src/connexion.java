@@ -6,11 +6,15 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -76,22 +80,72 @@ public class connexion {
 		JButton btnSeConnecter = new JButton("Se Connecter");
 		btnSeConnecter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				try{
+				
 					if (textFieldMail.getText().isEmpty() || passwordField.getText().isEmpty())
 					{
-					JOptionPane.showMessageDialog(frame,"Champs invalide");
+					JOptionPane.showMessageDialog(frame,"Merci de remplir les champs");
 					}else{
-						page1 info = new page1();
-						page1.main(null);
-						}}
+						String sql = "SELECT * FROM adherent WHERE email = ? AND password = ?;";
+						try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
+								PreparedStatement stmt = conn.prepareStatement(sql)) {
+							//hachage du mdp
+							
+							MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+				              // Conversion du mot de passe en tableau de bytes
+				              byte[] passwordBytes = passwordField.getText().getBytes(StandardCharsets.UTF_8);
+
+				              // Calcul du haché du mot de passe
+				              byte[] hashedBytes = digest.digest(passwordBytes);
+
+				              // Conversion du haché en une représentation hexadécimale
+				              StringBuilder hexString = new StringBuilder();
+				              for (byte b : hashedBytes) {
+				                  String hex = Integer.toHexString(0xff & b);
+				                  if (hex.length() == 1) {
+				                      hexString.append('0');
+				                  }
+				                  hexString.append(hex);
+				              }
+
+				              String hashedPassword = hexString.toString();
+				           
+					         
+				              
+				            //hachage du mdp
+				              
+				              stmt.setString(1, textFieldMail.getText());
+					          stmt.setString(2, hashedPassword);
+						        // Requête pour récupérer les informations sur le produit correspondant
+							
+					          try (ResultSet rs = stmt.executeQuery()) {
+					        	  if (rs.next()) {
+					                    // L'adhérent a été trouvé
+					                   
+					                    Acceuil nouvelleAcceuil = new Acceuil(textFieldMail.getText());
+					                    
+					                } else {
+					                    // L'adhérent n'a pas été trouvé
+					                    System.out.println("Identifiants incorrects.");
+					                }
+					            }
+
+					        } catch (SQLException e) {
+				        // Erreur de connexion à la base de données
+				        JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de données : " + e.getMessage());
+				        e.printStackTrace();
+				    } catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+							
+						}
 
 				
 					
 
 
-		         catch(Exception e ){
-		            System.out.println("Veuillez entrez les champs");
-		        } 
+		         
 			}
 			
 		});
@@ -104,12 +158,7 @@ public class connexion {
 		btnInscrire.setBounds(294, 356, 127, 34);
 		frame.getContentPane().add(btnInscrire);
 
-		try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
-            System.out.println("Connexion réussie à la base de données.");
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-        }
+	
 		
 	}
 	
