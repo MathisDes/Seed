@@ -112,7 +112,6 @@ public class inscription extends JFrame {
 		        	
 		        	  MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-<<<<<<< HEAD
 		              // Conversion du mot de passe en tableau de bytes
 		              byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
 
@@ -149,23 +148,6 @@ public class inscription extends JFrame {
 					
 				}
 		        catch (Exception exception) {
-=======
-					String query = "INSERT INTO adherent values('" + userName + "','" +
-							password + "','" + emailId + "','" + role +"')";
-
-					Statement sta = connection.createStatement();
-					int x = sta.executeUpdate(query);
-					if (x == 0) {
-						JOptionPane.showMessageDialog(btnNewButton, "Compte deja existant");
-					} else {
-						JOptionPane.showMessageDialog(btnNewButton," Votre compte a été crée ");
-						dispose();
-						accueil ac = new accueil();
-						
-					}
-					connection.close();
-				} catch (Exception exception) {
->>>>>>> 50b847f9f014c8948702a68316b0ce5fc4bf1ad5
 					exception.printStackTrace();
 				}
 				}}
