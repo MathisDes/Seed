@@ -109,6 +109,12 @@ public class accueil extends JFrame {
 		btnJeux.setFont(new Font("Eras Bold ITC", Font.PLAIN, 25));
 		btnJeux.setBounds(1163, 193, 196, 85);
 		contentPane.add(btnJeux);
+		btnJeux.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        	}
+        });
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 5));

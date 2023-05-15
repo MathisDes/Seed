@@ -17,12 +17,12 @@ public class Acceuil {
 	private JFrame frame;
 	private JTextField barreRecherche;
 	private Session maSession;
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 
-		Acceuil window = new Acceuil();
+		Acceuil window = new Acceuil("hugo@gmail.com");
 		window.frame.setVisible(true);
 
-	}*/
+	}
 
 
 	public Acceuil(String id) {
@@ -78,6 +78,12 @@ public class Acceuil {
 		btnJeux.setFont(new Font("Eras Bold ITC", Font.PLAIN, 25));
 		btnJeux.setBounds(1163, 193, 196, 85);
 		frame.getContentPane().add(btnJeux);
+		
+		btnJeux.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		ProduitPageJeu PageJeu = new ProduitPageJeu(3,maSession.getEmail());
+        	}
+        });
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 5));

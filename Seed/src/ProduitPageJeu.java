@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDate;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -11,15 +13,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-public class ProduitPageLivre extends JFrame {
-    private JLabel  lblImage, txtTitre, txtActeurs, txtSortie, txtRealisateur, txtGenre, txtPrix;
-    private JTextPane txtDescription;
-    private JPanel contentPane;
-    private JFrame frame;
+public class ProduitPageJeu extends JFrame {
+private JLabel  lblImage, txtTitre,txtStudio, txtSortie,txtGenre;
+private JTextPane txtDescription;
+private JPanel contentPane;
+private JFrame frame;
+private String idCompte;
 
-
-public ProduitPageLivre(int id) {
-    super("Détails du livre" );
+public ProduitPageJeu(int idJeu,String idCompte) {
+    super("Détails du Jeu");
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,26 +30,30 @@ public ProduitPageLivre(int id) {
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-    	String sql = "SELECT * FROM jeux WHERE id = " + id;
+        String sql = "SELECT * FROM jeux WHERE id = " + idJeu;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
             if (rs.next()) {
-            	 String titre = rs.getString("nom");
-                 String description = rs.getString("resume");
-                 String image_url = rs.getString("img_url");
-                 String sortie = rs.getString("annee");
-                 String auteur = rs.getString("auteur");
-                 String prix = rs.getString("prix");
-                 String genre = rs.getString("type");
+                String titre = rs.getString("nom");
+                String description = rs.getString("resume");
+                String image_url = rs.getString("img_url");
+                String sortie = rs.getString("annee");
+                String studio = rs.getString("studio");
+                String type = rs.getString("type");
+                String prix = rs.getString("prix");
+                Session maSession = new Session(idCompte);
+                
+                
 
-                 txtTitre = new JLabel(titre);
-                 txtSortie = new JLabel(sortie);
-                 txtRealisateur = new JLabel(auteur);
-                 txtActeurs = new JLabel();
-                 txtGenre = new JLabel(genre);
-                 lblImage = new JLabel();
-                 txtDescription = new JTextPane();
+                txtTitre = new JLabel(titre);
+           
+                txtSortie = new JLabel(sortie);
+                txtStudio= new JLabel(studio);
+                txtGenre = new JLabel(type);
+                lblImage = new JLabel();
+                txtDescription = new JTextPane();
+
                 // Charger l'image à partir d'une URL
                 try {
                     URL imageUrl = new URL(image_url);
@@ -84,16 +90,16 @@ public ProduitPageLivre(int id) {
                 txtSortie.setBounds(270, 103, 200, 21);
                 contentPane.add(txtSortie);
 
-                Label label_1_1 = new Label("De");
+                Label label_1_1 = new Label("Studio :");
                 label_1_1.setForeground(Color.GRAY);
                 label_1_1.setFont(new Font("Montserrat", Font.BOLD, 12));
-                label_1_1.setBounds(208, 150, 20, 21);
+                label_1_1.setBounds(208, 150, 45, 21);
                 contentPane.add(label_1_1);
 
-                txtRealisateur.setForeground(Color.GRAY);
-                txtRealisateur.setFont(new Font("Montserrat", Font.PLAIN, 12));
-                txtRealisateur.setBounds(230, 149, 200, 21);
-                contentPane.add(txtRealisateur);
+                txtStudio.setForeground(Color.GRAY);
+                txtStudio.setFont(new Font("Montserrat", Font.PLAIN, 12));
+                txtStudio.setBounds(257, 150, 200, 21);
+                contentPane.add(txtStudio);
 
                 
 
@@ -102,7 +108,8 @@ public ProduitPageLivre(int id) {
                 label_1_2.setFont(new Font("Montserrat", Font.BOLD, 12));
                 label_1_2.setBounds(208, 203, 67, 21);
                 contentPane.add(label_1_2);
-
+                
+                
                 txtDescription.setForeground(Color.GRAY);
                 txtDescription.setFont(new Font("Montserrat", Font.PLAIN, 15));
                 txtDescription.setText(description);
@@ -113,10 +120,17 @@ public ProduitPageLivre(int id) {
 
                 txtGenre.setForeground(new Color(34, 139, 34));
                 txtGenre.setFont(new Font("Montserrat", Font.BOLD, 16));
-                txtGenre.setBounds(208, 60, 143, 21);
+                txtGenre.setBounds(208, 60, 200, 21);
                 contentPane.add(txtGenre);
                 
-               
+                JButton back_button = new JButton("<Retour");
+                back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
+                back_button.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                	}
+                });
+                back_button.setBounds(10, 329, 81, 26);
+                contentPane.add(back_button);
 
                 Panel panel_1 = new Panel();
                 panel_1.setBounds(261, 268, 403, 87);
@@ -131,12 +145,8 @@ public ProduitPageLivre(int id) {
                 btnNewButton.setBackground(new Color(34, 139, 34));
                 btnNewButton.setForeground(new Color(255, 255, 255));
                 btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 23));
-                
-                btnNewButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                       
-                    }
-                });
+                int sliderValue;
+               
                 
                 JSlider slider = new JSlider();
                 slider.setBounds(10, 47, 200, 22);
@@ -146,8 +156,8 @@ public ProduitPageLivre(int id) {
                 slider.setMinimum(1);
                 slider.setToolTipText("");
                 slider.setPaintLabels(true);
-                int sliderValue = slider.getValue();
-                JLabel lblNewLabel = new JLabel("Louer " + sliderValue + " Semaines");
+                
+                JLabel lblNewLabel = new JLabel("Louer 2 Semaines");
                 lblNewLabel.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 16));
                 lblNewLabel.setForeground(new Color(34, 139, 34));
                 lblNewLabel.setBounds(40, 19, 157, 13);
@@ -160,21 +170,48 @@ public ProduitPageLivre(int id) {
                                         Float prixLocation = (slider.getValue())*Float.parseFloat(prix);
                                         btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 13));
                                         btnNewButton.setText("Louer (" + prixLocation +"€)" );
+                                        
+                                  }
+                                });
+                                
+                                btnNewButton.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                    	String sql = "INSERT INTO emprunts (id_jeu, item_type, utilisateur, date_emprunt, date_retour) VALUES (?, ?, ?, ?, ?)";
+                                    	try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
+                                    			PreparedStatement statement = conn2.prepareStatement(sql);) {
+                                    		
+                                            
+
+                                            // Définir les valeurs des paramètres de la requête
+                                            
+                                            statement.setInt(1, idJeu);  // Valeur de l'ID de l'item emprunté
+                                            statement.setString(2, "jeu");  // Type de l'item emprunté
+                                            statement.setString(3, idCompte);  // Utilisateur emprunteur
+                                            LocalDate dateEmprunt = LocalDate.now();
+                                            LocalDate dateRetour = dateEmprunt.plusWeeks(slider.getValue());
+
+                                            statement.setDate(4, java.sql.Date.valueOf(dateEmprunt));  // Date d'emprunt
+                                            statement.setDate(5, java.sql.Date.valueOf(dateRetour));  // Date de retour
+                                            statement.executeUpdate();
+                                    		conn2.close();
+                                    		
+                                    		JOptionPane.showMessageDialog(frame, "L'emprunt a été inséré avec succès. merci de rendre ce jeu avant le "+ dateRetour);
+                                    	}catch (SQLException e1) {
+                                            // Erreur de connexion à la base de données
+                                            JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de données : " + e1.getMessage());
+                                            e1.printStackTrace();
+                                        }
+                                    	
+                                    	
+                                       
                                     }
                                 });
                 
                 
 
                 
-
-                                JButton back_button = new JButton("<Retour");
-                                back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
-                                back_button.addActionListener(new ActionListener() {
-                                	public void actionPerformed(ActionEvent e) {
-                                	}
-                                });
-                                back_button.setBounds(10, 329, 81, 26);
-                                contentPane.add(back_button);
+               
+                
    
 
                 frame = new JFrame();
@@ -185,6 +222,7 @@ public ProduitPageLivre(int id) {
                 frame.setResizable(false);
                 frame.setVisible(true);
                 pack();
+                conn.close();
             } else {
                 // Produit introuvable
                 JOptionPane.showMessageDialog(null, "Produit introuvable !");
@@ -198,6 +236,6 @@ public ProduitPageLivre(int id) {
 }
 
 public static void main(String[] args) {
-    ProduitPageLivre produitPage = new ProduitPageLivre(12);
+    ProduitPageJeu produitPage = new ProduitPageJeu(1,"hugo@gmail.com");
 }
 }

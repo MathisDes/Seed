@@ -1,6 +1,9 @@
 import java.sql.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +39,7 @@ public ProduitPageFilm(int id, String type) {
                 String acteurs = rs.getString("acteurs");
                 String realisateur = rs.getString("realisateur");
                 String genre = rs.getString("genre");
+                String prix = rs.getString("prix");
 
                 txtTitre = new JLabel(titre);
            
@@ -122,19 +126,64 @@ public ProduitPageFilm(int id, String type) {
                 txtGenre.setFont(new Font("Montserrat", Font.BOLD, 16));
                 txtGenre.setBounds(208, 60, 200, 21);
                 contentPane.add(txtGenre);
+                
+                JButton back_button = new JButton("<Retour");
+                back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
+                back_button.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                	}
+                });
+                back_button.setBounds(10, 329, 81, 26);
+                contentPane.add(back_button);
 
+                Panel panel_1 = new Panel();
+                panel_1.setBounds(261, 268, 403, 87);
+                contentPane.add(panel_1);
+                panel_1.setLayout(null);
+                
+              
+                
                 JButton btnNewButton = new JButton("Louer");
+                btnNewButton.setBounds(260, 9, 150, 58);
+                panel_1.add(btnNewButton);
                 btnNewButton.setBackground(new Color(34, 139, 34));
                 btnNewButton.setForeground(new Color(255, 255, 255));
-                btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
+                btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 23));
+                
                 btnNewButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        // Action du bouton "Louer"
+                       
                     }
                 });
-                btnNewButton.setBounds(10, 297, 665, 58);
-                contentPane.add(btnNewButton);
+                
+                JSlider slider = new JSlider();
+                slider.setBounds(10, 47, 200, 22);
+                panel_1.add(slider);
+                slider.setValue(2);
+                slider.setMaximum(8);
+                slider.setMinimum(1);
+                slider.setToolTipText("");
+                slider.setPaintLabels(true);
+                int sliderValue = slider.getValue();
+                JLabel lblNewLabel = new JLabel("Louer " + sliderValue + " Semaines");
+                lblNewLabel.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 16));
+                lblNewLabel.setForeground(new Color(34, 139, 34));
+                lblNewLabel.setBounds(40, 19, 157, 13);
+                panel_1.add(lblNewLabel);
 
+                        
+                                slider.addChangeListener(new ChangeListener() {
+                                    public void stateChanged(ChangeEvent e) {
+                                        lblNewLabel.setText("Louer " + slider.getValue() + " Semaines");
+                                        Float prixLocation = (slider.getValue())*Float.parseFloat(prix);
+                                        btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 13));
+                                        btnNewButton.setText("Louer (" + prixLocation +"€)" );
+                                    }
+                                });
+                
+                
+
+                
                
                 
    
@@ -144,6 +193,7 @@ public ProduitPageFilm(int id, String type) {
                 frame.setSize(700,400);
                 frame.setLocationRelativeTo(null);
                 frame.setContentPane(contentPane);
+                frame.setResizable(false);
                 frame.setVisible(true);
                 pack();
             } else {

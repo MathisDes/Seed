@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 public class WindowBuilder extends JFrame {
 
 	private JPanel contentPane;
+	private Button button;
 
 	/**
 	 * Launch the application.
@@ -62,7 +63,7 @@ public class WindowBuilder extends JFrame {
 		
 		Label label = new Label("Inception");
 		label.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 24));
-		label.setBounds(199, 29, 461, 37);
+		label.setBounds(199, 29, 449, 37);
 		contentPane.add(label);
 		
 		Panel panel = new Panel();
@@ -156,6 +157,15 @@ public class WindowBuilder extends JFrame {
         btnNewButton.setBackground(new Color(34, 139, 34));
         btnNewButton.setForeground(new Color(255, 255, 255));
         btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
+        
+        button = new Button("Back");
+        button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 14));
+        button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        button.setBounds(10, 329, 81, 26);
+        contentPane.add(button);
         
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
