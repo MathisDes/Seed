@@ -26,19 +26,24 @@ CREATE TABLE IF NOT EXISTS `adherent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `emprunts` (
-  `id` int NOT NULL,
-  `item_id` int NOT NULL,
-  `item_type` enum('film','livre','jeu_video') NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_jeu` int DEFAULT NULL,
+  `id_livre` int DEFAULT NULL,
+  `id_film` int DEFAULT NULL,
+  `item_type` enum('film','livre','jeu') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `utilisateur` varchar(50) NOT NULL DEFAULT '0',
   `date_emprunt` date NOT NULL,
   `date_retour` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `item_id` (`item_id`),
   KEY `FK_emprunts_adherent` (`utilisateur`),
-  CONSTRAINT `emprunts_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `livres` (`id`),
-  CONSTRAINT `emprunts_ibfk_3` FOREIGN KEY (`item_id`) REFERENCES `jeux_videos` (`id`),
-  CONSTRAINT `FK_emprunts_adherent` FOREIGN KEY (`utilisateur`) REFERENCES `adherent` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `item_id` (`id_jeu`) USING BTREE,
+  KEY `FK_emprunts_livre` (`id_livre`),
+  KEY `FK_emprunts_films` (`id_film`),
+  CONSTRAINT `FK_emprunts_adherent` FOREIGN KEY (`utilisateur`) REFERENCES `adherent` (`email`),
+  CONSTRAINT `FK_emprunts_films` FOREIGN KEY (`id_film`) REFERENCES `films` (`id`),
+  CONSTRAINT `FK_emprunts_jeux` FOREIGN KEY (`id_jeu`) REFERENCES `jeux` (`id`),
+  CONSTRAINT `FK_emprunts_livre` FOREIGN KEY (`id_livre`) REFERENCES `livre` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `films` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -67,14 +72,14 @@ CREATE TABLE IF NOT EXISTS `info_personnelles` (
 CREATE TABLE IF NOT EXISTS `jeux` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` text NOT NULL,
-  `prix` int DEFAULT NULL,
-  `auteur` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `prix` varchar(50) DEFAULT NULL,
+  `studio` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `annee` date DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `resume` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `img_url` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `livre` (
   `id` int NOT NULL AUTO_INCREMENT,
