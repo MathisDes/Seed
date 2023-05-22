@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDate;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -18,7 +20,7 @@ public class ProduitPageLivre extends JFrame {
     private JFrame frame;
 
 
-public ProduitPageLivre(int id) {
+public ProduitPageLivre(int idLivre, String idCompte) {
     super("Détails du livre" );
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +30,7 @@ public ProduitPageLivre(int id) {
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-    	String sql = "SELECT * FROM jeux WHERE id = " + id;
+    	String sql = "SELECT * FROM jeux WHERE id = " + idLivre;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
@@ -132,12 +134,6 @@ public ProduitPageLivre(int id) {
                 btnNewButton.setForeground(new Color(255, 255, 255));
                 btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 23));
                 
-                btnNewButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                       
-                    }
-                });
-                
                 JSlider slider = new JSlider();
                 slider.setBounds(10, 47, 200, 22);
                 panel_1.add(slider);
@@ -175,6 +171,41 @@ public ProduitPageLivre(int id) {
                                 });
                                 back_button.setBounds(10, 329, 81, 26);
                                 contentPane.add(back_button);
+                
+                btnNewButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	String sql = "INSERT INTO emprunts (id_jeu, item_type, utilisateur, date_emprunt, date_retour) VALUES (?, ?, ?, ?, ?)";
+                    	try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
+                    			PreparedStatement statement = conn2.prepareStatement(sql);) {
+                    		
+                            
+
+                            // Définir les valeurs des paramètres de la requête
+                            
+                            statement.setInt(1, idLivre);  // Valeur de l'ID de l'item emprunté
+                            statement.setString(2, "Livre");  // Type de l'item emprunté
+                            statement.setString(3, idCompte);  // Utilisateur emprunteur
+                            LocalDate dateEmprunt = LocalDate.now();
+                            LocalDate dateRetour = dateEmprunt.plusWeeks(slider.getValue());
+
+                            statement.setDate(4, java.sql.Date.valueOf(dateEmprunt));  // Date d'emprunt
+                            statement.setDate(5, java.sql.Date.valueOf(dateRetour));  // Date de retour
+                            statement.executeUpdate();
+                    		conn2.close();
+                    		
+                    		JOptionPane.showMessageDialog(frame, "L'emprunt a été inséré avec succès. merci de rendre ce Film avant le "+ dateRetour);
+                    	}catch (SQLException e1) {
+                            // Erreur de connexion à la base de données
+                            JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de données : " + e1.getMessage());
+                            e1.printStackTrace();
+                        }
+                    	
+                    	
+                       
+                    }
+                });
+                
+                
    
 
                 frame = new JFrame();
@@ -198,6 +229,6 @@ public ProduitPageLivre(int id) {
 }
 
 public static void main(String[] args) {
-    ProduitPageLivre produitPage = new ProduitPageLivre(12);
+    ProduitPageLivre produitPage = new ProduitPageLivre(12,"hugo@gmail.com");
 }
 }
