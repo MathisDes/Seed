@@ -11,8 +11,9 @@ public class modifier_livre extends JFrame {
     
     private JTable table;
     private DefaultTableModel model;
-    private JTextField nom,annee,prix,type,auteur,resume,dispo;
+    private JTextField nom,prix,type,auteur,resume;
     private JTextField image;
+    private JTextField studio;
 
 	public static void main(String[] args) {
 
@@ -35,10 +36,9 @@ public class modifier_livre extends JFrame {
         model.addColumn("Nom");
         model.addColumn("Prix");
         model.addColumn("Auteur");
-        model.addColumn("Annee");
+        model.addColumn("Studio");
         model.addColumn("Type");
         model.addColumn("Resume");
-        model.addColumn("Disponibilite");
         model.addColumn("Image");
 
 
@@ -52,10 +52,6 @@ public class modifier_livre extends JFrame {
         getContentPane().add(nom);
         nom.setBounds(25, 330, 100, 20);
 
-        annee = new JTextField();
-        getContentPane().add(annee);
-        annee.setBounds(153, 330, 100, 20);
-        
         prix = new JTextField();
         getContentPane().add(prix);
         prix.setBounds(281, 330, 100, 20);
@@ -72,9 +68,6 @@ public class modifier_livre extends JFrame {
         getContentPane().add(resume);
         resume.setBounds(52, 484, 244, 56);
         
-        dispo = new JTextField();
-        getContentPane().add(dispo);
-        dispo.setBounds(281, 402, 100, 20);
         
 
         JLabel lblNom = new JLabel("Nom");
@@ -82,10 +75,10 @@ public class modifier_livre extends JFrame {
         lblNom.setBounds(48, 307, 45, 13);
         getContentPane().add(lblNom);
         
-        JLabel lblAnnee = new JLabel("Annee\r\n");
-        lblAnnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblAnnee.setBounds(168, 307, 45, 13);
-        getContentPane().add(lblAnnee);
+        JLabel lblStudio = new JLabel("Studio");
+        lblStudio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblStudio.setBounds(168, 307, 45, 13);
+        getContentPane().add(lblStudio);
         
         JLabel lblType = new JLabel("Type");
         lblType.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -109,7 +102,7 @@ public class modifier_livre extends JFrame {
         
         JLabel lblImage = new JLabel("Image");
         lblImage.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblImage.setBounds(418, 307, 90, 13);
+        lblImage.setBounds(311, 380, 90, 13);
         getContentPane().add(lblImage);
 
         JButton modifierButton = new JButton("Modifier");
@@ -157,7 +150,7 @@ public class modifier_livre extends JFrame {
         btnRadioLivre.setBounds(530, 458, 155, 56);
         getContentPane().add(btnRadioLivre);
         
-        JLabel lblNewLabel = new JLabel("Modifier un jeu");
+        JLabel lblNewLabel = new JLabel("Modifier un livre\r\n");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
         lblNewLabel.setBounds(25, 23, 228, 43);
         getContentPane().add(lblNewLabel);
@@ -168,13 +161,12 @@ public class modifier_livre extends JFrame {
         getContentPane().add(lblChangerOeuvre);
         
         image = new JTextField();
-        image.setBounds(408, 330, 100, 20);
+        image.setBounds(281, 402, 100, 20);
         getContentPane().add(image);
         
-        JLabel lblDispo = new JLabel("Disponibilite");
-        lblDispo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblDispo.setBounds(294, 379, 115, 13);
-        getContentPane().add(lblDispo);
+        studio = new JTextField();
+        studio.setBounds(153, 330, 100, 20);
+        getContentPane().add(studio);
         
         
         
@@ -190,10 +182,9 @@ public class modifier_livre extends JFrame {
                 row.add(rs.getString("nom"));
                 row.add(rs.getFloat("prix"));
                 row.add(rs.getString("auteur"));
-                row.add(rs.getString("annee"));
+                row.add(rs.getString("studio"));
                 row.add(rs.getString("type"));
                 row.add(rs.getString("resume"));
-                row.add(rs.getString("disponibilite"));
                 row.add(rs.getString("img_url"));
                 model.addRow(row);
             }
@@ -217,34 +208,30 @@ public class modifier_livre extends JFrame {
             String nouveauNom = nom.getText();
             float  nouveauPrix = Float.parseFloat(prix.getText());
             String nouveauAuteur = auteur.getText();
-            int nouvelleAnnee = Integer.parseInt(annee.getText());
+            String nouveauStudio = studio.getText();
             String nouveauType= type.getText();
             String nouveauxResume = resume.getText();
-            String nouvelleDispo = dispo.getText();
             String nouvelleImage = image.getText();
             
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
-                PreparedStatement stmt = conn.prepareStatement("UPDATE livre SET nom=?, prix=?, auteur=? , annee=? , type=? , resume=? , disponibilite =?,  img_url=?");
+                PreparedStatement stmt = conn.prepareStatement("UPDATE livre SET nom=?, prix=?, auteur=? , studio=? , type=? , resume=?,  img_url=?");
                 stmt.setString(1, nouveauNom);
                 stmt.setFloat(2, nouveauPrix);
                 stmt.setString(3, nouveauAuteur);
-                stmt.setInt(4, nouvelleAnnee);
+                stmt.setString(4, nouveauStudio);
                 stmt.setString(5, nouveauType);
                 stmt.setString(6, nouveauxResume);
-                stmt.setString(7, nouvelleDispo);
-                stmt.setString(8, nouvelleImage);
+                stmt.setString(7, nouvelleImage);
                 stmt.executeUpdate();
                 conn.close();
  
                 model.setValueAt(nouveauNom, selectedRow, 1);
                 model.setValueAt(nouveauPrix, selectedRow, 2);
                 model.setValueAt(nouveauAuteur, selectedRow, 3);
-                model.setValueAt(nouvelleAnnee, selectedRow, 4);
+                model.setValueAt(nouveauStudio, selectedRow, 4);
                 model.setValueAt(nouveauType, selectedRow, 5);
                 model.setValueAt(nouveauxResume, selectedRow, 6);
-                model.setValueAt(nouvelleDispo, selectedRow, 7);
-                model.setValueAt(nouvelleImage, selectedRow, 8);
                 
 
                 

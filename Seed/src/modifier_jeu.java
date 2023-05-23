@@ -11,7 +11,7 @@ public class modifier_jeu extends JFrame {
     
     private JTable table;
     private DefaultTableModel model;
-    private JTextField nom,annee,prix,type,editeur,resume,dispo;
+    private JTextField nom,annee,prix,type,studio,resume;
     private JTextField image;
 
 	public static void main(String[] args) {
@@ -34,11 +34,10 @@ public class modifier_jeu extends JFrame {
         model.addColumn("ID");
         model.addColumn("Nom");
         model.addColumn("Prix");
-        model.addColumn("Editeur");
+        model.addColumn("Studio");
         model.addColumn("Annee");
         model.addColumn("Type");
         model.addColumn("Resume");
-        model.addColumn("Disponibilite");
         model.addColumn("Image");
 
 
@@ -64,17 +63,13 @@ public class modifier_jeu extends JFrame {
         getContentPane().add(type);
         type.setBounds(153, 402, 100, 20);
         
-        editeur = new JTextField();
-        getContentPane().add(editeur);
-        editeur.setBounds(25, 402, 100, 20);
+        studio = new JTextField();
+        getContentPane().add(studio);
+        studio.setBounds(25, 402, 100, 20);
         
         resume = new JTextField();
         getContentPane().add(resume);
         resume.setBounds(52, 484, 244, 56);
-        
-        dispo = new JTextField();
-        getContentPane().add(dispo);
-        dispo.setBounds(281, 402, 100, 20);
         
 
         JLabel lblNom = new JLabel("Nom");
@@ -97,10 +92,10 @@ public class modifier_jeu extends JFrame {
         lblPrix.setBounds(311, 307, 45, 13);
         getContentPane().add(lblPrix);
         
-        JLabel lblEditeur = new JLabel("Editeur");
-        lblEditeur.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblEditeur.setBounds(48, 380, 60, 13);
-        getContentPane().add(lblEditeur);
+        JLabel lblStudio = new JLabel("Studio");
+        lblStudio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblStudio.setBounds(48, 380, 60, 13);
+        getContentPane().add(lblStudio);
         
         JLabel lblResume = new JLabel("Resume");
         lblResume.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -109,7 +104,7 @@ public class modifier_jeu extends JFrame {
         
         JLabel lblImage = new JLabel("Image");
         lblImage.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblImage.setBounds(418, 307, 90, 13);
+        lblImage.setBounds(311, 380, 90, 13);
         getContentPane().add(lblImage);
 
         JButton modifierButton = new JButton("Modifier");
@@ -168,13 +163,8 @@ public class modifier_jeu extends JFrame {
         getContentPane().add(lblChangerOeuvre);
         
         image = new JTextField();
-        image.setBounds(408, 330, 100, 20);
+        image.setBounds(281, 402, 100, 20);
         getContentPane().add(image);
-        
-        JLabel lblDispo = new JLabel("Disponibilite");
-        lblDispo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblDispo.setBounds(294, 379, 115, 13);
-        getContentPane().add(lblDispo);
         
         
         
@@ -189,11 +179,10 @@ public class modifier_jeu extends JFrame {
                 row.add(rs.getInt("id"));
                 row.add(rs.getString("nom"));
                 row.add(rs.getFloat("prix"));
-                row.add(rs.getString("editeur"));
+                row.add(rs.getString("studio"));
                 row.add(rs.getString("annee"));
                 row.add(rs.getString("type"));
                 row.add(rs.getString("resume"));
-                row.add(rs.getString("disponibilite"));
                 row.add(rs.getString("img_url"));
                 model.addRow(row);
             }
@@ -216,34 +205,31 @@ public class modifier_jeu extends JFrame {
         if (selectedRow >= 0) {
             String nouveauNom = nom.getText();
             float  nouveauPrix = Float.parseFloat(prix.getText());
-            String nouveauEditeur = editeur.getText();
-            int nouvelleAnnee = Integer.parseInt(annee.getText());
+            String nouveauStudio = studio.getText();
+            String nouvelleAnnee = annee.getText();
             String nouveauType= type.getText();
             String nouveauxResume = resume.getText();
-            String nouvelleDispo = dispo.getText();
-            String nouvelleImage = dispo.getText();
+            String nouvelleImage = image.getText();
             
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
-                PreparedStatement stmt = conn.prepareStatement("UPDATE jeux SET nom=?, prix=?, editeur=? , annee=? , type=? , resume=? , disponibilite =?,  img_url=?");
+                PreparedStatement stmt = conn.prepareStatement("UPDATE jeux SET nom=?, prix=?, studio=? , annee=? , type=? , resume=? ,  img_url=?");
                 stmt.setString(1, nouveauNom);
                 stmt.setFloat(2, nouveauPrix);
-                stmt.setString(3, nouveauEditeur);
-                stmt.setInt(4, nouvelleAnnee);
+                stmt.setString(3, nouveauStudio);
+                stmt.setString(4, nouvelleAnnee);
                 stmt.setString(5, nouveauType);
                 stmt.setString(6, nouveauxResume);
-                stmt.setString(7, nouvelleDispo);
-                stmt.setString(8, nouvelleImage);
+                stmt.setString(7, nouvelleImage);
                 stmt.executeUpdate();
                 conn.close();
  
                 model.setValueAt(nouveauNom, selectedRow, 1);
                 model.setValueAt(nouveauPrix, selectedRow, 2);
-                model.setValueAt(nouveauEditeur, selectedRow, 3);
+                model.setValueAt(nouveauStudio, selectedRow, 3);
                 model.setValueAt(nouvelleAnnee, selectedRow, 4);
                 model.setValueAt(nouveauType, selectedRow, 5);
-                model.setValueAt(nouveauxResume, selectedRow, 6);
-                model.setValueAt(nouvelleDispo, selectedRow, 7);
+                model.setValueAt(nouveauxResume, selectedRow, 7);
                 model.setValueAt(nouvelleImage, selectedRow, 8);
                 
 

@@ -12,6 +12,7 @@ public class modifier_film extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private JTextField titre,annee,genre,realisateur,acteur,synopsis,img_url;
+    private JTextField prix;
 
 	public static void main(String[] args) {
 
@@ -38,6 +39,7 @@ public class modifier_film extends JFrame {
         model.addColumn("Acteurs");
         model.addColumn("Sysnopsis");
         model.addColumn("Image");
+        model.addColumn("Prix");
 
 
         table = new JTable(model);
@@ -165,6 +167,15 @@ public class modifier_film extends JFrame {
         lblChangerOeuvre.setBounds(483, 362, 228, 43);
         getContentPane().add(lblChangerOeuvre);
         
+        prix = new JTextField();
+        prix.setBounds(408, 330, 100, 20);
+        getContentPane().add(prix);
+        
+        JLabel lblPrix = new JLabel("Prix\r\n");
+        lblPrix.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblPrix.setBounds(436, 315, 45, 13);
+        getContentPane().add(lblPrix);
+        
         
         
         
@@ -177,12 +188,13 @@ public class modifier_film extends JFrame {
                 Vector row = new Vector();
                 row.add(rs.getInt("id"));
                 row.add(rs.getString("titre"));
-                row.add(rs.getInt("annee"));
+                row.add(rs.getString("annee"));
                 row.add(rs.getString("genre"));
                 row.add(rs.getString("acteurs"));
                 row.add(rs.getString("realisateur"));
                 row.add(rs.getString("synopsis"));
                 row.add(rs.getString("img_url"));
+                row.add(rs.getString("prix"));
                 model.addRow(row);
             }
             conn.close();
@@ -203,22 +215,24 @@ public class modifier_film extends JFrame {
         int selectedRow = table.getSelectedRow();
         if (selectedRow >= 0) {
             String nouveauTitre = titre.getText();
-            int nouvelleAnnee = Integer.parseInt(annee.getText());
+            String nouvelleAnnee = annee.getText();
             String nouveauGenre = genre.getText();
             String nouveauRealisateur = realisateur.getText();
             String nouveauxActeurs = acteur.getText();
             String nouveauSynopsis = synopsis.getText();
             String nouvelleImage = img_url.getText();
+            String nouveauPrix = prix.getText();
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
-                PreparedStatement stmt = conn.prepareStatement("UPDATE films SET titre=?, annee=?, genre=? , realisateur=? , acteurs=? , synopsis=? , img_url=?");
+                PreparedStatement stmt = conn.prepareStatement("UPDATE films SET titre=?, annee=?, genre=? , realisateur=? , acteurs=? , synopsis=? , img_url=?, prix=?");
                 stmt.setString(1, nouveauTitre);
-                stmt.setInt(2, nouvelleAnnee);
+                stmt.setString(2, nouvelleAnnee);
                 stmt.setString(3, nouveauGenre);
                 stmt.setString(4, nouveauRealisateur);
                 stmt.setString(5, nouveauxActeurs);
                 stmt.setString(6, nouveauSynopsis);
                 stmt.setString(7, nouvelleImage);
+                stmt.setString(8, nouveauPrix);
                 stmt.executeUpdate();
                 conn.close();
  
@@ -229,6 +243,7 @@ public class modifier_film extends JFrame {
                 model.setValueAt(nouveauxActeurs, selectedRow, 5);
                 model.setValueAt(nouveauSynopsis, selectedRow, 6);
                 model.setValueAt(nouvelleImage, selectedRow, 7);
+                model.setValueAt(nouveauPrix, selectedRow, 8);
                 
 
 
