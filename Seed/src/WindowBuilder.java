@@ -3,11 +3,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.BorderLayout;
 import java.awt.Label;
 import java.awt.Font;
@@ -27,11 +31,14 @@ import java.awt.Toolkit;
 import java.awt.Button;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
+import java.awt.GridLayout;
 
 public class WindowBuilder extends JFrame {
 
-	private JPanel contentPane;
-	private Button button;
+	private JFrame frame;
+	private JTextField barreRecherche;
+	private Session maSession;
+	private JLabel   txtTitreFilm, txtTitreLivre, txtTitreJeux, texte, lblImageFilm , lblImageLivre, lblImageJeux;
 
 	/**
 	 * Launch the application.
@@ -41,7 +48,7 @@ public class WindowBuilder extends JFrame {
 			public void run() {
 				try {
 					WindowBuilder frame = new WindowBuilder();
-					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,123 +61,64 @@ public class WindowBuilder extends JFrame {
 	 */
 	public WindowBuilder() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 402);
-		contentPane = new JPanel();
+		  frame = new JFrame();
+	        frame.setSize(1400,700);
+	        frame.setResizable(false);
+	        frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.getContentPane().setLayout(null);
+			
+			JPanel panel = new JPanel();
+			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+			panel.setBackground(Color.GRAY);
+			panel.setBounds(0, 0, 1400, 100);
+			frame.getContentPane().add(panel);
+			panel.setLayout(null);
+			
+			// Créer un composant d'image
+	        ImageIcon imageIcon = new ImageIcon("C:/laragon/www/Seed_directory/Seed/src/others/logo.png");
+	        JLabel label = new JLabel(imageIcon);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		Label label = new Label("Inception");
-		label.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 24));
-		label.setBounds(199, 29, 449, 37);
-		contentPane.add(label);
-		
-		Panel panel = new Panel();
-		panel.setBounds(10, 31, 183, 233);
-		contentPane.add(panel);
-		
-		Label label_1 = new Label("Sortie en");
-		label_1.setForeground(Color.GRAY);
-		label_1.setFont(new Font("Montserrat", Font.BOLD, 12));
-		label_1.setBounds(208, 103, 66, 21);
-		contentPane.add(label_1);
-		
-		Label label_2 = new Label("New label");
-		label_2.setForeground(Color.GRAY);
-		label_2.setFont(new Font("Montserrat", Font.PLAIN, 12));
-		label_2.setBounds(281, 103, 71, 21);
-		contentPane.add(label_2);
-		
-		Label label_1_1 = new Label("De");
-		label_1_1.setForeground(Color.GRAY);
-		label_1_1.setFont(new Font("Montserrat", Font.BOLD, 12));
-		label_1_1.setBounds(208, 172, 24, 21);
-		contentPane.add(label_1_1);
-		
-		Label label_2_1 = new Label("New label");
-		label_2_1.setForeground(Color.GRAY);
-		label_2_1.setFont(new Font("Montserrat", Font.PLAIN, 12));
-		label_2_1.setBounds(238, 172, 71, 21);
-		contentPane.add(label_2_1);
-		
-		Label label_1_1_1 = new Label("Avec");
-		label_1_1_1.setForeground(Color.GRAY);
-		label_1_1_1.setFont(new Font("Montserrat", Font.BOLD, 12));
-		label_1_1_1.setBounds(206, 137, 42, 21);
-		contentPane.add(label_1_1_1);
-		
-		Label label_1_1_1_1 = new Label("Christian Bale, Heath Ledger, Aaron Eckhart");
-		label_1_1_1_1.setForeground(Color.GRAY);
-		label_1_1_1_1.setFont(new Font("Montserrat", Font.PLAIN, 12));
-		label_1_1_1_1.setBounds(246, 137, 375, 21);
-		contentPane.add(label_1_1_1_1);
-		
-		Label label_1_2 = new Label("Synopsis :");
-		label_1_2.setForeground(Color.GRAY);
-		label_1_2.setFont(new Font("Montserrat", Font.BOLD, 12));
-		label_1_2.setBounds(208, 203, 81, 21);
-		contentPane.add(label_1_2);
-		
-		JTextPane synopsis_txt = new JTextPane();
-		synopsis_txt.setForeground(Color.GRAY);
-		synopsis_txt.setFont(new Font("Montserrat", Font.PLAIN, 15));
-		synopsis_txt.setText("Un voleur professionnel s’infiltre dans les rêves de ses cibles pour leur voler des secrets.");
-		synopsis_txt.setBackground(SystemColor.menu);
-		synopsis_txt.setBounds(288, 203, 318, 65);
-		contentPane.add(synopsis_txt);
-		
-		Label label_1_1_1_2 = new Label("Genre");
-		label_1_1_1_2.setForeground(Color.GRAY);
-		label_1_1_1_2.setFont(new Font("Montserrat", Font.BOLD, 12));
-		label_1_1_1_2.setBounds(208, 72, 143, 21);
-		contentPane.add(label_1_1_1_2);
-
-        // Champ de sélection de chiffre entre 1 et 9
-        SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 9, 1);
-        
-        Panel panel_1 = new Panel();
-        panel_1.setBounds(261, 268, 403, 87);
-        contentPane.add(panel_1);
-        panel_1.setLayout(null);
-        
-        JSlider slider = new JSlider();
-        slider.setBounds(10, 47, 200, 22);
-        panel_1.add(slider);
-        slider.setValue(2);
-        slider.setMaximum(8);
-        slider.setToolTipText("");
-        slider.setPaintLabels(true);
-        
-                int sliderValue = slider.getValue();
-                
-                     
-        JLabel lblNewLabel = new JLabel(sliderValue + " Semaines");
-        lblNewLabel.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 13));
-        lblNewLabel.setBounds(53, 24, 157, 13);
-        panel_1.add(lblNewLabel);
-        
-
-        JButton btnNewButton = new JButton("Louer");
-        btnNewButton.setBounds(273, 9, 120, 58);
-        panel_1.add(btnNewButton);
-        btnNewButton.setBackground(new Color(34, 139, 34));
-        btnNewButton.setForeground(new Color(255, 255, 255));
-        btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
-        
-        button = new Button("Back");
-        button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 14));
-        button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        button.setBounds(10, 329, 81, 26);
-        contentPane.add(button);
-        
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
-            }
-        });
+	        // Ajouter le composant à la fenêtre
+	        getContentPane().add(label);
+	        label.setVisible(true);
+	   
+			
+			
+			JButton btnPanier = new JButton("Mes réservations");
+			btnPanier.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			btnPanier.setBounds(1193, 10, 180, 80);
+			panel.add(btnPanier);
+			
+			JButton btnCompte = new JButton("Mon compte\r\n");
+			btnCompte.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			btnCompte.setBounds(967, 10, 180, 80);
+			panel.add(btnCompte);
+			
+			barreRecherche = new JTextField();
+			barreRecherche.setForeground(new Color(128, 128, 128));
+			barreRecherche.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			barreRecherche.setText("Rechercher...");
+			barreRecherche.setBounds(193, 27, 719, 49);
+			panel.add(barreRecherche);
+			barreRecherche.setColumns(10);
+			
+			frame.getContentPane().add(panel);
+			
+			JLabel lblNewLabel = new JLabel("New label");
+			lblNewLabel.setBounds(20, 10, 123, 80);
+			panel.add(lblNewLabel);
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(71, 146, 1268, 468);
+			frame.getContentPane().add(panel_1);
+			panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+			
+			JLabel lblNewLabel_1 = new JLabel("Mes Reservations en cours");
+			lblNewLabel_1.setFont(new Font("Montserrat", Font.BOLD, 22));
+			lblNewLabel_1.setBounds(501, 110, 412, 43);
+			frame.getContentPane().add(lblNewLabel_1);
+			frame.setVisible(true);
+      
 	}
 }
