@@ -86,13 +86,13 @@ public class Connexion {
 							
 							MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-				              // Conversion du mot de passe en tableau de bytes
+				
 				              byte[] passwordBytes = passwordField.getText().getBytes(StandardCharsets.UTF_8);
 
-				              // Calcul du haché du mot de passe
+				     
 				              byte[] hashedBytes = digest.digest(passwordBytes);
 
-				              // Conversion du haché en une représentation hexadécimale
+				             
 				              StringBuilder hexString = new StringBuilder();
 				              for (byte b : hashedBytes) {
 				                  String hex = Integer.toHexString(0xff & b);

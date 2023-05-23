@@ -25,7 +25,7 @@ public class Ajout_livre extends JFrame {
 	private JTextField textField_Nom;
 	private JTextField textField_Prix;
 	private JTextField textField_Auteur;
-	private JTextField textField_Annee;
+	private JTextField textField_Studio;
 	private JTextField textField_Type;
 	private JTextField textField_Resume;
 	private JTextField textField_url;
@@ -62,11 +62,11 @@ public class Ajout_livre extends JFrame {
 
 				try {
 					Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/seed","root", "");
-					PreparedStatement st = (PreparedStatement) connection.prepareStatement("INSERT INTO livre (nom, prix, auteur, annee, type, resume, img_url) VALUES (?, ?, ?, ?, ?, ?, ?) ");
+					PreparedStatement st = (PreparedStatement) connection.prepareStatement("INSERT INTO livre (nom, prix, auteur, studio, type, resume, img_url) VALUES (?, ?, ?, ?, ?, ?, ?) ");
 					st.setString(1,textField_Nom.getText());
 					st.setString(2,textField_Prix.getText());
 					st.setString(3,textField_Auteur.getText());
-					st.setString(4,textField_Annee.getText());
+					st.setString(4,textField_Studio.getText());
 					st.setString(5,textField_Type.getText());
 					st.setString(6,textField_Resume.getText());
 					st.setString(7,textField_url.getText());
@@ -100,10 +100,10 @@ public class Ajout_livre extends JFrame {
 		textField_Auteur.setBounds(106, 201, 96, 19);
 		contentPane.add(textField_Auteur);
 		
-		textField_Annee = new JTextField();
-		textField_Annee.setColumns(10);
-		textField_Annee.setBounds(285, 106, 96, 19);
-		contentPane.add(textField_Annee);
+		textField_Studio = new JTextField();
+		textField_Studio.setColumns(10);
+		textField_Studio.setBounds(285, 106, 96, 19);
+		contentPane.add(textField_Studio);
 		
 		textField_Type = new JTextField();
 		textField_Type.setColumns(10);
@@ -120,20 +120,20 @@ public class Ajout_livre extends JFrame {
 		lblTitre.setBounds(37, 109, 45, 13);
 		contentPane.add(lblTitre);
 		
-		JLabel lblAnnee = new JLabel("prix");
-		lblAnnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAnnee.setBounds(33, 155, 45, 13);
-		contentPane.add(lblAnnee);
+		JLabel lblPrix = new JLabel("prix");
+		lblPrix.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPrix.setBounds(33, 155, 45, 13);
+		contentPane.add(lblPrix);
 		
 		JLabel lblGenre = new JLabel("auteur");
 		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblGenre.setBounds(37, 204, 45, 13);
 		contentPane.add(lblGenre);
 		
-		JLabel lblRealisateur = new JLabel("annee");
-		lblRealisateur.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblRealisateur.setBounds(230, 109, 56, 13);
-		contentPane.add(lblRealisateur);
+		JLabel lblStudio = new JLabel("studio\r\n");
+		lblStudio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblStudio.setBounds(230, 109, 56, 13);
+		contentPane.add(lblStudio);
 		
 		JLabel lblActeur = new JLabel("type");
 		lblActeur.setFont(new Font("Tahoma", Font.PLAIN, 15));
