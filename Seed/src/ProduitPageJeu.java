@@ -23,7 +23,7 @@ private String idCompte;
 public ProduitPageJeu(int idJeu,String idCompte) {
     super("Détails du Jeu");
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     // Connexion à la base de données
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
@@ -123,10 +123,11 @@ public ProduitPageJeu(int idJeu,String idCompte) {
                 txtGenre.setBounds(208, 60, 200, 21);
                 contentPane.add(txtGenre);
                 
-                JButton back_button = new JButton("<Retour");
+                JButton back_button = new JButton("retour");
                 back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
                 back_button.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
+                		frame.dispose();
                 	}
                 });
                 back_button.setBounds(10, 329, 81, 26);
@@ -235,7 +236,4 @@ public ProduitPageJeu(int idJeu,String idCompte) {
     }
 }
 
-public static void main(String[] args) {
-    ProduitPageJeu produitPage = new ProduitPageJeu(1,"hugo@gmail.com");
-}
 }

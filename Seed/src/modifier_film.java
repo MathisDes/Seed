@@ -13,13 +13,7 @@ public class modifier_film extends JFrame {
     private DefaultTableModel model;
     private JTextField titre,annee,genre,realisateur,acteur,synopsis,img_url;
 
-	public static void main(String[] args) {
 
-		modifier_film frame = new modifier_film();
-		frame.setVisible(true);
-
-	}
-    
     
     public modifier_film() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +113,7 @@ public class modifier_film extends JFrame {
         btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

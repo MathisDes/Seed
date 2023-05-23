@@ -22,7 +22,7 @@ private JFrame frame;
 public ProduitPageFilm(int idFilm,String idCompte) {
     super("Détails du Film ");
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     // Connexion à la base de données
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
@@ -129,10 +129,11 @@ public ProduitPageFilm(int idFilm,String idCompte) {
                 txtGenre.setBounds(208, 60, 200, 21);
                 contentPane.add(txtGenre);
                 
-                JButton back_button = new JButton("<Retour");
+                JButton back_button = new JButton("retour");
                 back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
                 back_button.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
+                		frame.dispose();
                 	}
                 });
                 back_button.setBounds(10, 329, 81, 26);
@@ -238,7 +239,5 @@ public ProduitPageFilm(int idFilm,String idCompte) {
     }
 }
 
-public static void main(String[] args) {
-    ProduitPageFilm produitPage = new ProduitPageFilm(1, "hugo@gmail.com");
-}
+
 }

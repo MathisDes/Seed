@@ -14,12 +14,7 @@ public class modifier_jeu extends JFrame {
     private JTextField nom,annee,prix,type,editeur,resume,dispo;
     private JTextField image;
 
-	public static void main(String[] args) {
 
-		modifier_jeu frame = new modifier_jeu();
-		frame.setVisible(true);
-
-	}
     
     
     public modifier_jeu() {
@@ -121,7 +116,7 @@ public class modifier_jeu extends JFrame {
         btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

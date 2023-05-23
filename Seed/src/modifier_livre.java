@@ -14,14 +14,7 @@ public class modifier_livre extends JFrame {
     private JTextField nom,annee,prix,type,auteur,resume,dispo;
     private JTextField image;
 
-	public static void main(String[] args) {
 
-		modifier_livre frame = new modifier_livre();
-		frame.setVisible(true);
-
-	}
-    
-    
     public modifier_livre() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(802, 652);
@@ -121,7 +114,7 @@ public class modifier_livre extends JFrame {
         btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

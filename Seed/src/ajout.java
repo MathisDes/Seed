@@ -20,14 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 public class ajout extends JFrame {
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
-
-		ajout frame = new ajout();
-		frame.setVisible(true);
-
-	}
-
-
+	
 	public ajout() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700,400);

@@ -3,7 +3,7 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 
-public class ajout_film extends JFrame {
+public class Ajout_film extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_Titre;
 	private JTextField textField_Annee;
@@ -13,15 +13,9 @@ public class ajout_film extends JFrame {
 	private JTextField textField_Syno;
 	private JTextField textField_url;
 
-	public static void main(String[] args) {
-
-		ajout_film frame = new ajout_film();
-		frame.setVisible(true);
-
-	}
 	
 
-	public ajout_film() {
+	public Ajout_film() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(859,496);
 		setResizable(false);
@@ -56,7 +50,7 @@ public class ajout_film extends JFrame {
 					JOptionPane.showMessageDialog(null, "Insertion réussie");
 					
 					dispose();
-					ajout_film ajout_film = new ajout_film();
+					Ajout_film ajout_film = new Ajout_film();
 					ajout_film.setVisible(true);
 					
 					
@@ -146,7 +140,7 @@ public class ajout_film extends JFrame {
 		btnRadioJeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ajout_jeu ajout_jeu = new ajout_jeu();
+				Ajout_jeu ajout_jeu = new Ajout_jeu();
 				ajout_jeu.setVisible(true);
 			}
 		});
@@ -158,7 +152,7 @@ public class ajout_film extends JFrame {
 		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ajout_livre ajout_liv = new ajout_livre();
+				Ajout_livre ajout_liv = new Ajout_livre();
 				ajout_liv.setVisible(true);
 				
 			}
@@ -170,7 +164,7 @@ public class ajout_film extends JFrame {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

@@ -1,23 +1,38 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
-import javax.swing.*;
-import javax.swing.table.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class suppr_livre extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+public class Suppr_jeu extends JFrame {
 	private JPanel contentPane;
 	   private JTable table;
 	   private JButton btnSuppr;
 
-	public static void main(String[] args) {
 
-		suppr_livre frame = new suppr_livre();
-		frame.setVisible(true);
 
-	}
-	
-
-	public suppr_livre() {
+	public Suppr_jeu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(859,496);
 		setResizable(false);
@@ -35,7 +50,7 @@ public class suppr_livre extends JFrame {
 	         Statement stmt = con.createStatement();
 
 
-	         ResultSet rs = stmt.executeQuery("SELECT * FROM livre");
+	         ResultSet rs = stmt.executeQuery("SELECT * FROM jeux");
 	         
 
 	         DefaultTableModel model = new DefaultTableModel();
@@ -85,7 +100,7 @@ public class suppr_livre extends JFrame {
 	    	            Statement stmt = con.createStatement();
 	    	            
 	    	           
-	    	            String sql = "DELETE FROM livre WHERE id = '" + primaryKey + "'";
+	    	            String sql = "DELETE FROM jeux WHERE id = '" + primaryKey + "'";
 	    	            stmt.executeUpdate(sql);
 	    	            stmt.close();
 	    	            con.close();
@@ -102,14 +117,14 @@ public class suppr_livre extends JFrame {
 
 
 	      JScrollPane tableau = new JScrollPane(table);
-	      tableau.setBounds(28, 100, 452, 218);
+	      tableau.setBounds(28, 100, 365, 218);
 	      getContentPane().add(tableau);
 	      setVisible(true);
 
 		
-		JLabel lblPrincipal = new JLabel("Supprimer un livre");
+		JLabel lblPrincipal = new JLabel("Supprimer un jeu");
 		lblPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblPrincipal.setBounds(49, 31, 230, 47);
+		lblPrincipal.setBounds(49, 31, 229, 47);
 		contentPane.add(lblPrincipal);
 		
 		JRadioButton btnRadioFilm = new JRadioButton("FILM");
@@ -117,31 +132,31 @@ public class suppr_livre extends JFrame {
 		btnRadioFilm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				suppr_film suppr_fil = new suppr_film();
+				Suppr_film suppr_fil = new Suppr_film();
 				suppr_fil.setVisible(true);
 			}
 		});
 		btnRadioFilm.setBounds(572, 271, 136, 47);
 		contentPane.add(btnRadioFilm);
 		
-		JRadioButton btnRadioJeu = new JRadioButton("JEU");
-		btnRadioJeu.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRadioJeu.addActionListener(new ActionListener() {
+		JRadioButton btnRadioLivre = new JRadioButton("LIVRE");
+		btnRadioLivre.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRadioLivre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				suppr_jeu suppr_jeu = new suppr_jeu();
-				suppr_jeu.setVisible(true);
+				Suppr_livre suppr_liv = new Suppr_livre();
+				suppr_liv.setVisible(true);
 				
 			}
 		});
-		btnRadioJeu.setBounds(572, 320, 153, 47);
-		contentPane.add(btnRadioJeu);
+		btnRadioLivre.setBounds(572, 320, 153, 47);
+		contentPane.add(btnRadioLivre);
 		
 		JButton btnRetour = new JButton("<- Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

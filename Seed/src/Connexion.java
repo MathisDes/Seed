@@ -25,23 +25,17 @@ import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-public class connexion {
+public class Connexion {
 
 	private JFrame frame;
 	private JTextField textFieldMail;
 	private JPasswordField passwordField;
 	private Connection conn;
 
-	public static void main(String[] args) {
-
-		connexion window = new connexion();
-		window.frame.setVisible(true);
 
 
-	}
 
-
-	public connexion() {
+	public Connexion() {
 		
 		 PreparedStatement ps;
 		 ResultSet rs;
@@ -64,7 +58,7 @@ public class connexion {
 		frame.getContentPane().add(lblMail);
 		
 		textFieldMail = new JTextField();
-		textFieldMail.setBounds(260, 136, 213, 26);
+		textFieldMail.setBounds(240, 136, 213, 26);
 		frame.getContentPane().add(textFieldMail);
 		textFieldMail.setColumns(10);
 		
@@ -74,7 +68,7 @@ public class connexion {
 		frame.getContentPane().add(lblMDP);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(260, 244, 213, 26);
+		passwordField.setBounds(240, 244, 213, 26);
 		frame.getContentPane().add(passwordField);
 		
 		JButton btnSeConnecter = new JButton("Se Connecter");
@@ -157,8 +151,13 @@ public class connexion {
 		btnInscrire.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnInscrire.setBounds(294, 356, 127, 34);
 		frame.getContentPane().add(btnInscrire);
-
-	
+		btnInscrire.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frame.dispose();
+        		Inscription pageInscri = new Inscription ();
+        	}
+        });
+		this.frame.setVisible(true);
 		
 	}
 	

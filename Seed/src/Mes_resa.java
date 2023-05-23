@@ -53,14 +53,7 @@ public class Mes_resa {
 	private JFrame frame;
 	private JTextField barreRecherche;
 	private Session maSession;
-	private JLabel   txtTitreFilm, txtTitreLivre, txtTitreJeux, texte, lblImageFilm , lblImageLivre, lblImageJeux;
-	public static void main(String[] args) {
-
-		Mes_resa window = new Mes_resa("hugo@gmail.com");
-		window.frame.setVisible(true);
-
-	}
-
+		
 
 	public Mes_resa(String id) {
 		
@@ -101,10 +94,16 @@ public class Mes_resa {
 		btnPanier.setBounds(1193, 10, 180, 80);
 		panel.add(btnPanier);
 		
-		JButton btnCompte = new JButton("Mon compte\r\n");
+		JButton btnCompte = new JButton("Acceuil\r\n");
 		btnCompte.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCompte.setBounds(967, 10, 180, 80);
 		panel.add(btnCompte);
+		btnCompte.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frame.dispose();
+            	Acceuil pageAcceuil = new Acceuil(id);
+        	}
+        });
 		
 		barreRecherche = new JTextField();
 		barreRecherche.setForeground(new Color(128, 128, 128));
@@ -115,7 +114,7 @@ public class Mes_resa {
 		barreRecherche.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(71, 200, 1268, 468);
+		panel_1.setBounds(71, 200, 1300, 670);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(new GridLayout(0, 2, 10, 10)); // GridLayout avec 2 colonnes et un espacement de 10 pixels
 

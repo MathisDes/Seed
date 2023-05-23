@@ -21,12 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 public class supprimer extends JFrame {
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
 
-		supprimer frame = new supprimer();
-		frame.setVisible(true);
-
-	}
 	
 	
     public static Connection  connecterDB(){

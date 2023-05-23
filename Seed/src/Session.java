@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Session {
 	
-	private String email,username,role;
+	private String email,username,role,statut;
 
 	public String getEmail() {
 		return email;
@@ -34,9 +34,10 @@ public class Session {
 		        		this.email = rs.getString("email");
 		        		this.role = rs.getString("role");
 		        		this.username = rs.getString("username");
+		        		this.statut = rs.getString("role");
 		        		
 		        	}
-		        	else {JOptionPane.showMessageDialog(null, "Produit introuvable !");}
+		        	else {JOptionPane.showMessageDialog(null, "Compte introuvable !");}
 		        }
 	} catch (SQLException e) {
         // Erreur de connexion à la base de données

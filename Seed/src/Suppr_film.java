@@ -25,20 +25,15 @@ import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-public class suppr_film extends JFrame {
+public class Suppr_film extends JFrame {
 	private JPanel contentPane;
 	   private JTable table;
 	   private JButton btnSuppr;
 
-	public static void main(String[] args) {
 
-		suppr_film frame = new suppr_film();
-		frame.setVisible(true);
-
-	}
 	
 
-	public suppr_film() {
+	public Suppr_film() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(859,496);
 		setResizable(false);
@@ -138,7 +133,7 @@ public class suppr_film extends JFrame {
 		btnRadioJeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				suppr_jeu suppr_jeu = new suppr_jeu();
+				Suppr_jeu suppr_jeu = new Suppr_jeu();
 				suppr_jeu.setVisible(true);
 			}
 		});
@@ -150,7 +145,7 @@ public class suppr_film extends JFrame {
 		btnRadioLivre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				suppr_livre suppr_liv = new suppr_livre();
+				Suppr_livre suppr_liv = new Suppr_livre();
 				suppr_liv.setVisible(true);
 				
 			}
@@ -162,7 +157,7 @@ public class suppr_film extends JFrame {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				admin adm = new admin();
+				Admin adm = new Admin();
 				adm.setVisible(true);
 			}
 		});

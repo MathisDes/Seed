@@ -23,14 +23,14 @@ public class ProduitPageLivre extends JFrame {
 public ProduitPageLivre(int idLivre, String idCompte) {
     super("Détails du livre" );
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     // Connexion à la base de données
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-    	String sql = "SELECT * FROM jeux WHERE id = " + idLivre;
+    	String sql = "SELECT * FROM livre WHERE id = " + idLivre;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
@@ -118,6 +118,7 @@ public ProduitPageLivre(int idLivre, String idCompte) {
                 txtGenre.setBounds(208, 60, 143, 21);
                 contentPane.add(txtGenre);
                 
+                
                
 
                 Panel panel_1 = new Panel();
@@ -163,18 +164,19 @@ public ProduitPageLivre(int idLivre, String idCompte) {
 
                 
 
-                                JButton back_button = new JButton("<Retour");
-                                back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
-                                back_button.addActionListener(new ActionListener() {
-                                	public void actionPerformed(ActionEvent e) {
-                                	}
-                                });
-                                back_button.setBounds(10, 329, 81, 26);
-                                contentPane.add(back_button);
+                JButton back_button = new JButton("retour");
+                back_button.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 11));
+                back_button.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		frame.dispose();
+                	}
+                });
+                back_button.setBounds(10, 329, 81, 26);
+                contentPane.add(back_button);
                 
                 btnNewButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                    	String sql = "INSERT INTO emprunts (id_jeu, item_type, utilisateur, date_emprunt, date_retour) VALUES (?, ?, ?, ?, ?)";
+                    	String sql = "INSERT INTO emprunts (id_livre, item_type, utilisateur, date_emprunt, date_retour) VALUES (?, ?, ?, ?, ?)";
                     	try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
                     			PreparedStatement statement = conn2.prepareStatement(sql);) {
                     		
@@ -228,7 +230,5 @@ public ProduitPageLivre(int idLivre, String idCompte) {
     }
 }
 
-public static void main(String[] args) {
-    ProduitPageLivre produitPage = new ProduitPageLivre(12,"hugo@gmail.com");
-}
+
 }

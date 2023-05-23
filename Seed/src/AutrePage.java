@@ -37,11 +37,6 @@ public class AutrePage extends JFrame implements ActionListener  {
    
 
    
-    public static void main(String[] args) {
-        AutrePage autrepage = new AutrePage();
-        autrepage.setVisible(true);
-        
-    }
 
 }
 

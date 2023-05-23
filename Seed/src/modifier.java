@@ -29,12 +29,7 @@ public class modifier extends JFrame {
 	private JTextField textField_Syno;
 	private JTextField textField_url;
 
-	public static void main(String[] args) {
 
-		modifier frame = new modifier();
-		frame.setVisible(true);
-
-	}
 	
 
 	public modifier() {

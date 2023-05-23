@@ -4,9 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 
@@ -20,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
-public class inscription extends JFrame {
+public class Inscription extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField email;
@@ -29,16 +32,8 @@ public class inscription extends JFrame {
 	private JButton btnNewButton;
 
 
-	public static void main(String[] args) {
-
-		inscription frame = new inscription();
-		frame.setVisible(true);
-
-	}
-
-
-	public inscription() {
-
+	public Inscription() {
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(670, 600);
 		setResizable(false);
@@ -89,9 +84,21 @@ public class inscription extends JFrame {
 		passwordField.setBounds(239, 283, 228, 50);
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		contentPane.add(passwordField);
+		
+		JButton btnSeConnecter = new JButton("Se Connecter");
+		btnSeConnecter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				dispose();
+				Connexion pageConnexion = new Connexion();
+			
+			}});
+		btnSeConnecter.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSeConnecter.setBounds(363, 489, 178, 42);
+		contentPane.add(btnSeConnecter);
+		
 
 		btnNewButton = new JButton("s'inscrire");
-		btnNewButton.setBounds(263, 489, 178, 42);
+		btnNewButton.setBounds(163, 489, 178, 42);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -138,7 +145,8 @@ public class inscription extends JFrame {
 
 		            int res= statement.executeUpdate();
 		            if (res > 0) {
-		                System.out.println("L'inscription a été effectuée avec succès !");
+		                dispose();
+		                Acceuil pageAcceuil = new Acceuil(emailId);
 		            }
 		           
 				}
