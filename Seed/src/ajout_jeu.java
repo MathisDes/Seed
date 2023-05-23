@@ -24,7 +24,7 @@ public class ajout_jeu extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_Nom;
 	private JTextField textField_Prix;
-	private JTextField textField_Studio;
+	private JTextField textField_Editeur;
 	private JTextField textField_Annee;
 	private JTextField textField_Type;
 	private JTextField textField_Resume;
@@ -62,10 +62,10 @@ public class ajout_jeu extends JFrame {
 
 				try {
 					Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/seed","root", "");
-					PreparedStatement st = (PreparedStatement) connection.prepareStatement("INSERT INTO jeux (nom, prix, studio, annee, type, resume, img_url) VALUES (?, ?, ?, ?, ?, ?,?) ");
+					PreparedStatement st = (PreparedStatement) connection.prepareStatement("INSERT INTO jeux (nom, prix, editeur, annee, type, resume, disponibilite, img_url) VALUES (?, ?, ?, ?, ?, ?, 1,?) ");
 					st.setString(1,textField_Nom.getText());
 					st.setString(2,textField_Prix.getText());
-					st.setString(3,textField_Studio.getText());
+					st.setString(3,textField_Editeur.getText());
 					st.setString(4,textField_Annee.getText());
 					st.setString(5,textField_Type.getText());
 					st.setString(6,textField_Resume.getText());
@@ -95,10 +95,10 @@ public class ajout_jeu extends JFrame {
 		textField_Prix.setBounds(106, 152, 96, 19);
 		contentPane.add(textField_Prix);
 		
-		textField_Studio = new JTextField();
-		textField_Studio.setColumns(10);
-		textField_Studio.setBounds(106, 201, 96, 19);
-		contentPane.add(textField_Studio);
+		textField_Editeur = new JTextField();
+		textField_Editeur.setColumns(10);
+		textField_Editeur.setBounds(106, 201, 96, 19);
+		contentPane.add(textField_Editeur);
 		
 		textField_Annee = new JTextField();
 		textField_Annee.setColumns(10);
@@ -115,22 +115,22 @@ public class ajout_jeu extends JFrame {
 		textField_Resume.setBounds(285, 201, 116, 68);
 		contentPane.add(textField_Resume);
 		
-		JLabel lblTitre = new JLabel("nom");
+		JLabel lblTitre = new JLabel("nom\r\n");
 		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTitre.setBounds(37, 109, 45, 13);
 		contentPane.add(lblTitre);
 		
-		JLabel lblAnnee = new JLabel("prix");
+		JLabel lblAnnee = new JLabel("prix\r\n");
 		lblAnnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAnnee.setBounds(33, 155, 45, 13);
 		contentPane.add(lblAnnee);
 		
-		JLabel lblStudio = new JLabel("studio");
-		lblStudio.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblStudio.setBounds(37, 204, 59, 13);
-		contentPane.add(lblStudio);
+		JLabel lblGenre = new JLabel("editeur");
+		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGenre.setBounds(37, 204, 45, 13);
+		contentPane.add(lblGenre);
 		
-		JLabel lblRealisateur = new JLabel("annee");
+		JLabel lblRealisateur = new JLabel("annee\r\n");
 		lblRealisateur.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRealisateur.setBounds(230, 109, 56, 13);
 		contentPane.add(lblRealisateur);
@@ -150,7 +150,7 @@ public class ajout_jeu extends JFrame {
 		contentPane.add(textField_url);
 		textField_url.setColumns(10);
 		
-		JLabel lblNewLabel_image = new JLabel("image");
+		JLabel lblNewLabel_image = new JLabel("image\r\n");
 		lblNewLabel_image.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_image.setBounds(399, 109, 45, 13);
 		contentPane.add(lblNewLabel_image);

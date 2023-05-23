@@ -33,7 +33,7 @@ public class Jeu extends JFrame {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
 
  
-            String requete = "SELECT nom, annee, studio, img_url FROM jeux ORDER BY annee DESC LIMIT 4";
+            String requete = "SELECT nom, annee, studio, img_url FROM jeux ORDER BY id DESC LIMIT 4";
             Statement statement = connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
 

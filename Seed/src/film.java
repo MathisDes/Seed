@@ -9,7 +9,7 @@ public class Film extends JFrame {
     private JPanel FilmPanel;
     private String idCompte;
 
-    public Film(String idCompte) {
+    public Film() {
 
         setTitle("Bibliothèque de films");
         setSize(1400, 700);
@@ -34,7 +34,7 @@ public class Film extends JFrame {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
 
  
-            String requete = "SELECT titre, annee, genre, img_url FROM films ORDER BY annee DESC LIMIT 4";
+            String requete = "SELECT titre, annee, genre, img_url FROM films ORDER BY id DESC LIMIT 4";
             Statement statement = connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
 
@@ -90,7 +90,7 @@ public class Film extends JFrame {
 
     public static void main(String[] args) {
        
-            Film interfaceGraphique = new Film(1);
+            Film interfaceGraphique = new Film();
             interfaceGraphique.setVisible(true);
             interfaceGraphique.affiche();
         ;

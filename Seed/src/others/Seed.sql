@@ -60,7 +60,7 @@ INSERT INTO `emprunts` (`id`, `id_jeu`, `id_livre`, `id_film`, `item_type`, `uti
 	(4, 3, NULL, NULL, 'jeu', 'hugo@gmail.com', '2023-05-15', '2023-06-05'),
 	(5, 3, NULL, NULL, 'jeu', 'hugo@gmail.com', '2023-05-15', '2023-06-19'),
 	(6, 3, NULL, NULL, 'jeu', 'hugo@gmail.com', '2023-05-15', '2023-06-12'),
-	(7, NULL, 17, NULL, 'livre', 'hugo@gmail.com', '2023-05-23', '2023-10-23');
+	(10, 1, NULL, NULL, 'film', 'hugo@gmail.com', '2023-05-17', '2023-06-07');
 
 CREATE TABLE IF NOT EXISTS `films` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -132,20 +132,21 @@ CREATE TABLE IF NOT EXISTS `livre` (
   `studio` date DEFAULT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `resume` text,
+  `disponibilite` binary(1) DEFAULT NULL,
   `img_url` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `livre` (`id`, `nom`, `prix`, `auteur`, `studio`, `type`, `resume`, `img_url`) VALUES
-	(12, 'Le Petit Prince', '9.5', 'Antoine de Saint-Exupéry', '1943-04-06', 'Conte', 'Le Petit Prince raconte l\'histoire d\'un petit garçon venu d\'une autre planète.', 'https://m.media-amazon.com/images/I/71lyHAf7XXL.jpg'),
-	(13, '1984', '12', 'George Orwell', '1949-06-08', 'Roman d\'anticipation', '1984 décrit une dystopie où les libertés individuelles sont supprimées.', 'https://m.media-amazon.com/images/I/71kxa1-0mfL.jpg'),
-	(14, 'Le Seigneur des Anneaux', '20', 'J.R.R. Tolkien', '1954-07-29', 'Roman de fantasy', 'Le Seigneur des Anneaux raconte l\'histoire d\'un hobbit nommé Frodon qui part en quête pour détruire un anneau magique.', 'https://m.media-amazon.com/images/I/514+aP+SZ+L._SX349_BO1,204,203,200_.jpg'),
-	(15, 'Orgueil et Préjugés', '8', 'Jane Austen', '1813-01-28', 'Roman romantique', 'Orgueil et Préjugés raconte l\'histoire d\'une famille anglaise bourgeoise dans les années 1800.', 'https://m.media-amazon.com/images/I/81nKAJtQ+uL.jpg'),
-	(16, 'Les Misérables', '15', 'Victor Hugo', '1862-04-05', 'Roman historique', 'Les Misérables raconte l\'histoire d\'un homme appelé Jean Valjean qui doit faire face aux défis de la société française du XIXe siècle.', 'https://m.media-amazon.com/images/I/71lxLN4vorL.jpg'),
-	(17, 'Le Crime de l\'Orient-Express', '10', 'Agatha Christie', '1934-01-01', 'Roman policier', 'Le Crime de l\'Orient-Express raconte l\'histoire d\'un meurtre qui se produit à bord de l\'Orient-Express.', 'https://m.media-amazon.com/images/I/71DYNs3ybnL.jpg'),
-	(18, 'Moby Dick', '18', 'Herman Melville', '1851-10-18', 'Roman d\'aventure', 'Moby Dick raconte l\'histoire d\'un capitaine qui se lance à la poursuite d\'une baleine blanche.', 'https://m.media-amazon.com/images/I/81vjde0JFHL.jpg'),
-	(19, 'Le Vieil Homme et la Mer', '6', 'Ernest Hemingway', '1952-09-01', 'Roman d\'aventure', 'Le Vieil Homme et la Mer raconte l\'histoire d\'un pêcheur cubain qui se lance dans une bataille contre un énorme poisson.', 'https://m.media-amazon.com/images/I/81bnd2bWlEL.jpg'),
-	(20, 'Guerre et Paix', '25', 'Léon Tolstoï', '1869-01-01', 'Roman historique', 'Guerre et Paix raconte l\'histoire d\'une famille russe aristocratique pendant la guerre napoléonienne.', 'https://m.media-amazon.com/images/I/61v3P3KCNZL.jpg');
+INSERT INTO `livre` (`id`, `nom`, `prix`, `auteur`, `studio`, `type`, `resume`, `disponibilite`, `img_url`) VALUES
+	(12, 'Le Petit Prince', '9.5', 'Antoine de Saint-Exupéry', '1943-04-06', 'Conte', 'Le Petit Prince raconte l\'histoire d\'un petit garçon venu d\'une autre planète.', _binary 0x01, 'https://m.media-amazon.com/images/I/71lyHAf7XXL.jpg'),
+	(13, '1984', '12', 'George Orwell', '1949-06-08', 'Roman d\'anticipation', '1984 décrit une dystopie où les libertés individuelles sont supprimées.', _binary 0x01, 'https://example.com/1984.jpg'),
+	(14, 'Le Seigneur des Anneaux', '20', 'J.R.R. Tolkien', '1954-07-29', 'Roman de fantasy', 'Le Seigneur des Anneaux raconte l\'histoire d\'un hobbit nommé Frodon qui part en quête pour détruire un anneau magique.', _binary 0x01, 'https://example.com/le-seigneur-des-anneaux.jpg'),
+	(15, 'Orgueil et Préjugés', '8', 'Jane Austen', '1813-01-28', 'Roman romantique', 'Orgueil et Préjugés raconte l\'histoire d\'une famille anglaise bourgeoise dans les années 1800.', _binary 0x01, 'https://example.com/orgueil-et-prejuges.jpg'),
+	(16, 'Les Misérables', '15', 'Victor Hugo', '1862-04-05', 'Roman historique', 'Les Misérables raconte l\'histoire d\'un homme appelé Jean Valjean qui doit faire face aux défis de la société française du XIXe siècle.', _binary 0x01, 'https://example.com/les-miserables.jpg'),
+	(17, 'Le Crime de l\'Orient-Express', '10', 'Agatha Christie', '1934-01-01', 'Roman policier', 'Le Crime de l\'Orient-Express raconte l\'histoire d\'un meurtre qui se produit à bord de l\'Orient-Express.', _binary 0x01, 'https://example.com/le-crime-de-l-orient-express.jpg'),
+	(18, 'Moby Dick', '18', 'Herman Melville', '1851-10-18', 'Roman d\'aventure', 'Moby Dick raconte l\'histoire d\'un capitaine qui se lance à la poursuite d\'une baleine blanche.', _binary 0x01, 'https://example.com/moby-dick.jpg'),
+	(19, 'Le Vieil Homme et la Mer', '6', 'Ernest Hemingway', '1952-09-01', 'Roman d\'aventure', 'Le Vieil Homme et la Mer raconte l\'histoire d\'un pêcheur cubain qui se lance dans une bataille contre un énorme poisson.', _binary 0x01, 'https://example.com/le-vieil-homme-et-la-mer.jpg'),
+	(20, 'Guerre et Paix', '25', 'Léon Tolstoï', '1869-01-01', 'Roman historique', 'Guerre et Paix raconte l\'histoire d\'une famille russe aristocratique pendant la guerre napoléonienne.', _binary 0x01, 'https://example.com/guerre-et-paix.jpg');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
