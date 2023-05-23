@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDate;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -17,8 +19,8 @@ private JTextPane txtDescription;
 private JPanel contentPane;
 private JFrame frame;
 
-public ProduitPageFilm(String result, String type) {
-    super("Détails du " + type);
+public ProduitPageFilm(int idFilm,String idCompte) {
+    super("Détails du Film ");
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,7 +29,7 @@ public ProduitPageFilm(String result, String type) {
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-        String sql = "SELECT * FROM films WHERE id = " + result;
+        String sql = "SELECT * FROM films WHERE id = " + idFilm;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
@@ -39,7 +41,7 @@ public ProduitPageFilm(String result, String type) {
                 String acteurs = rs.getString("acteurs");
                 String realisateur = rs.getString("realisateur");
                 String genre = rs.getString("genre");
-               String prix = rs.getString("prix");
+                String prix = rs.getString("prix");
 
                 txtTitre = new JLabel(titre);
            
@@ -149,13 +151,6 @@ public ProduitPageFilm(String result, String type) {
                 btnNewButton.setBackground(new Color(34, 139, 34));
                 btnNewButton.setForeground(new Color(255, 255, 255));
                 btnNewButton.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 23));
-                
-                btnNewButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                       
-                    }
-                });
-                
                 JSlider slider = new JSlider();
                 slider.setBounds(10, 47, 200, 22);
                 panel_1.add(slider);
@@ -180,6 +175,41 @@ public ProduitPageFilm(String result, String type) {
                                         btnNewButton.setText("Louer (" + prixLocation +"€)" );
                                     }
                                 });
+                
+                
+                
+                btnNewButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	String sql = "INSERT INTO emprunts (id_jeu, item_type, utilisateur, date_emprunt, date_retour) VALUES (?, ?, ?, ?, ?)";
+                    	try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/seed", "root", "");
+                    			PreparedStatement statement = conn2.prepareStatement(sql);) {
+                    		
+                            
+
+                            // Définir les valeurs des paramètres de la requête
+                            
+                            statement.setInt(1, idFilm);  // Valeur de l'ID de l'item emprunté
+                            statement.setString(2, "film");  // Type de l'item emprunté
+                            statement.setString(3, idCompte);  // Utilisateur emprunteur
+                            LocalDate dateEmprunt = LocalDate.now();
+                            LocalDate dateRetour = dateEmprunt.plusWeeks(slider.getValue());
+
+                            statement.setDate(4, java.sql.Date.valueOf(dateEmprunt));  // Date d'emprunt
+                            statement.setDate(5, java.sql.Date.valueOf(dateRetour));  // Date de retour
+                            statement.executeUpdate();
+                    		conn2.close();
+                    		
+                    		JOptionPane.showMessageDialog(frame, "L'emprunt a été inséré avec succès. merci de rendre ce Film avant le "+ dateRetour);
+                    	}catch (SQLException e1) {
+                            // Erreur de connexion à la base de données
+                            JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de données : " + e1.getMessage());
+                            e1.printStackTrace();
+                        }
+                    	
+                    	
+                       
+                    }
+                });
                 
                 
 
@@ -209,6 +239,6 @@ public ProduitPageFilm(String result, String type) {
 }
 
 public static void main(String[] args) {
-    ProduitPageFilm produitPage = new ProduitPageFilm("", "films");
+    ProduitPageFilm produitPage = new ProduitPageFilm(1, "hugo@gmail.com");
 }
 }

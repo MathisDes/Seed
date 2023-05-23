@@ -20,7 +20,7 @@ public class ProduitPageLivre extends JFrame {
     private JFrame frame;
 
 
-public ProduitPageLivre(String result, String idCompte) {
+public ProduitPageLivre(int idLivre, String idCompte) {
     super("Détails du livre" );
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,7 +30,7 @@ public ProduitPageLivre(String result, String idCompte) {
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-    	String sql = "SELECT * FROM jeux WHERE id = " + result;
+    	String sql = "SELECT * FROM jeux WHERE id = " + idLivre;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
@@ -182,7 +182,7 @@ public ProduitPageLivre(String result, String idCompte) {
 
                             // Définir les valeurs des paramètres de la requête
                             
-                            statement.setString(1, result);  // Valeur de l'ID de l'item emprunté
+                            statement.setInt(1, idLivre);  // Valeur de l'ID de l'item emprunté
                             statement.setString(2, "Livre");  // Type de l'item emprunté
                             statement.setString(3, idCompte);  // Utilisateur emprunteur
                             LocalDate dateEmprunt = LocalDate.now();
@@ -229,6 +229,6 @@ public ProduitPageLivre(String result, String idCompte) {
 }
 
 public static void main(String[] args) {
-    ProduitPageLivre produitPage = new ProduitPageLivre("","hugo@gmail.com");
+    ProduitPageLivre produitPage = new ProduitPageLivre(12,"hugo@gmail.com");
 }
 }

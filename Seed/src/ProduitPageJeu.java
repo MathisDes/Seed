@@ -20,7 +20,7 @@ private JPanel contentPane;
 private JFrame frame;
 private String idCompte;
 
-public ProduitPageJeu(String result,String idCompte) {
+public ProduitPageJeu(int idJeu,String idCompte) {
     super("Détails du Jeu");
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,7 +30,7 @@ public ProduitPageJeu(String result,String idCompte) {
          Statement stmt = conn.createStatement()) {
 
         // Requête pour récupérer les informations sur le produit correspondant
-        String sql = "SELECT * FROM jeux WHERE id = " + result;
+        String sql = "SELECT * FROM jeux WHERE id = " + idJeu;
         try (ResultSet rs = stmt.executeQuery(sql)) {
 
             // Si le produit existe, affichage des informations dans l'interface
@@ -129,7 +129,6 @@ public ProduitPageJeu(String result,String idCompte) {
                 	public void actionPerformed(ActionEvent e) {
                 	}
                 });
-                
                 back_button.setBounds(10, 329, 81, 26);
                 contentPane.add(back_button);
 
@@ -185,7 +184,7 @@ public ProduitPageJeu(String result,String idCompte) {
 
                                             // Définir les valeurs des paramètres de la requête
                                             
-                                            statement.setString(1, result);  // Valeur de l'ID de l'item emprunté
+                                            statement.setInt(1, idJeu);  // Valeur de l'ID de l'item emprunté
                                             statement.setString(2, "jeu");  // Type de l'item emprunté
                                             statement.setString(3, idCompte);  // Utilisateur emprunteur
                                             LocalDate dateEmprunt = LocalDate.now();
@@ -236,15 +235,7 @@ public ProduitPageJeu(String result,String idCompte) {
     }
 }
 
-private void performSearch(String searchTerm) {
-    // Code pour effectuer la recherche en fonction du terme de recherche saisi
-    // Ici, vous pouvez ajouter votre propre logique de recherche
-
-    System.out.println("Recherche : " + searchTerm);
-}
-
 public static void main(String[] args) {
-    ProduitPageJeu produitPage = new ProduitPageJeu("","hugo@gmail.com");
-    
+    ProduitPageJeu produitPage = new ProduitPageJeu(1,"hugo@gmail.com");
 }
 }

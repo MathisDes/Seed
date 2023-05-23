@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
-public class Film extends JFrame {
+public class Jeu extends JFrame {
 
     private JPanel FilmPanel;
-    private String idCompte;
 
-    public Film(String idCompte) {
+    public Jeu() {
 
         setTitle("Bibliothèque de films");
         setSize(1400, 700);
@@ -34,21 +33,21 @@ public class Film extends JFrame {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
 
  
-            String requete = "SELECT titre, annee, genre, img_url FROM films ORDER BY annee DESC LIMIT 4";
+            String requete = "SELECT nom, annee, studio, img_url FROM jeux ORDER BY annee DESC LIMIT 4";
             Statement statement = connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
 
             while (resultat.next()) {
      
-                String titre = resultat.getString("titre");
+                String titre = resultat.getString("nom");
                 String annee = resultat.getString("annee");
-                String genre = resultat.getString("genre");
+                String genre = resultat.getString("studio");
                 String imageUrl = resultat.getString("img_url");
 
                
                 JPanel moviePanel = new JPanel(new GridBagLayout());
 
-                JLabel infoLabel = new JLabel("<html><b>Titre:</b> " + titre + "<br><b>Année:</b> " + annee + "<br><b>Genre:</b> " + genre + "</html>");
+                JLabel infoLabel = new JLabel("<html><b>Nom:</b> " + titre + "<br><b>Année:</b> " + annee + "<br><b>Studio:</b> " + genre + "</html>");
                 infoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
                 
@@ -90,7 +89,7 @@ public class Film extends JFrame {
 
     public static void main(String[] args) {
        
-            Film interfaceGraphique = new Film(1);
+            Jeu interfaceGraphique = new Jeu();
             interfaceGraphique.setVisible(true);
             interfaceGraphique.affiche();
         ;
